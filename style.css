@@ -846,9 +846,13 @@ xclip
 
 .services-inner-box:hover h2{
 	color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 .services-inner-box:hover p{
 	color: #ffffff;
+    font-size: 14px;
+    line-height: 1.7;
 }
 
 
@@ -3291,6 +3295,11 @@ select.mobile-device {
     overflow: hidden;
 }
 
+#struktur ol,
+#struktur ol li {
+  list-style: decimal;
+}
+
 .struktur-header-modern .container {
   position: relative;
   z-index: 2;         
@@ -3351,4 +3360,44 @@ select.mobile-device {
     color: black;
     margin-top: 50px;
 }
+
+.struktur-box .bagan-item {
+  background: #ffffff;
+  border: 2px solid #1d3b8b;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #1d3b8b;
+  display: inline-block;
+  min-width: 220px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.bagan-item.utama {
+  background: #1d3b8b;
+  color: white;
+  border-color: #1d3b8b;
+}
+
+.bagan-level {
+  position: relative;
+}
+
+/* Hapus garis default, pindahkan ke class khusus */
+.bagan-level-spine::after {
+  content: "";
+  width: 2px;
+  height: 25px;
+  background: #1d3b8b;
+  display: block;
+  margin: 0 auto;
+}
+
+
+.section.struktur {
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
 
