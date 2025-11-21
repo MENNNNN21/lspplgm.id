@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Admin LSP PLGM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Reuse style utama project -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Tambahan CSS khusus admin (prefix .admin- agar tidak ganggu halaman lain) -->
+  <style>
+    /* ====== RESET RINGAN UNTUK DASHBOARD ADMIN ====== */
+    body.admin-body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Ubuntu', sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* ====== LAYOUT UTAMA ====== */
+    .admin-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar kiri */
+    .admin-sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 250px;
+      background: var(--inv, #009bb7);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 0;
+      z-index: 1000;
+      transition: transform 0.3s ease;
+    }
+
+    .admin-sidebar-header {
+      padding: 0 20px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      margin-bottom: 12px;
+    }
+
+    .admin-sidebar-logo {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .admin-sidebar-logo span.badge {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .admin-sidebar-menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .admin-sidebar-menu li {
+      margin: 2px 0;
+    }
+
+    .admin-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.9);
+      transition: background 0.2s ease, color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .admin-nav-link i {
+      font-size: 15px;
+      width: 18px;
+      text-align: center;
+    }
+
+    .admin-nav-link:hover {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    .admin-nav-link.active {
+      background: #ffffff;
+      color: var(--inv, #009bb7);
+      font-weight: 500;
+    }
+
+    .admin-nav-link.active i {
+      color: var(--inv, #009bb7);
+    }
+
+    .admin-sidebar-footer {
+      padding: 10px 20px 0;
+      font-size: 11px;
+      opacity: 0.8;
+    }
+
+    /* Overlay untuk mobile */
+    .admin-sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .admin-sidebar-overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Area kanan (topbar + content) */
+    .admin-main {
+      margin-left: 250px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: #f4f6f9;
+    }
+
+    /* ====== TOPBAR ====== */
+    .admin-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 950;
+      background: #ffffff;
+      border-bottom: 1px solid #e1e4ea;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .admin-topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .admin-topbar-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .admin-topbar-subtitle {
+      font-size: 12px;
+      color: #777;
+    }
+
+    .admin-topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .admin-icon-btn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 18px;
+      position: relative;
+    }
+
+    .admin-icon-badge {
+      position: absolute;
+      top: -2px;
+      right: -4px;
+      background: #ff5b5b;
+      color: #fff;
+      border-radius: 999px;
+      font-size: 9px;
+      padding: 1px 4px;
+    }
+
+    .admin-user-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .admin-user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--inv, #009bb7);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .admin-user-name {
+      font-weight: 500;
+    }
+
+    .admin-user-role {
+      font-size: 11px;
+      color: #777;
+    }
+
+    /* Tombol hamburger (mobile) */
+    .admin-sidebar-toggle {
+      display: none;
+      border: none;
+      background: transparent;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* ====== MAIN CONTENT ====== */
+    .admin-content {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .admin-section {
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .admin-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .admin-section-header {
+      margin-bottom: 18px;
+    }
+
+    .admin-section-header h2 {
+      font-size: 20px;
+      margin: 0 0 4px;
+      color: #333;
+    }
+
+    .admin-section-header p {
+      margin: 0;
+      font-size: 13px;
+      color: #777;
+    }
+
+    /* ====== DASHBOARD CARDS ====== */
+    .admin-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .admin-card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 16px 18px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e4e7ec;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .admin-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .admin-card-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #777;
+      font-weight: 600;
+    }
+
+    .admin-card-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: rgba(0, 155, 183, 0.08);
+      color: var(--inv, #009bb7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .admin-card-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 4px;
+    }
+
+    .admin-card-subtext {
+      font-size: 12px;
+      color: #999;
+    }
+
+    /* ====== TABLES ====== */
+    .admin-table-wrapper {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e4e7ec;
+      padding: 16px 18px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+    }
+
+    .admin-table-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .admin-table-title span.sub {
+      font-size: 12px;
+      font-weight: 400;
+      color: #777;
+    }
+
+    table.admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 600px;
+    }
+
+    table.admin-table thead {
+      background: #f0f2f7;
+    }
+
+    table.admin-table th,
+    table.admin-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #e4e7ec;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    table.admin-table th {
+      font-weight: 600;
+      color: #555;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    table.admin-table tbody tr:hover {
+      background: #f9fafb;
+    }
+
+    .admin-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .admin-badge-success {
+      background: rgba(34, 197, 94, 0.12);
+      color: #15803d;
+    }
+
+    .admin-badge-warning {
+      background: rgba(245, 158, 11, 0.12);
+      color: #b45309;
+    }
+
+    .admin-badge-info {
+      background: rgba(59, 130, 246, 0.12);
+      color: #1d4ed8;
+    }
+
+    .admin-badge-muted {
+      background: rgba(148, 163, 184, 0.12);
+      color: #475569;
+    }
+
+    /* ====== BOX PENGUMUMAN ====== */
+    .admin-flex-row {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .admin-info-box {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e4e7ec;
+      padding: 16px 18px;
+    }
+
+    .admin-info-box h3 {
+      font-size: 15px;
+      margin: 0 0 8px;
+    }
+
+    .admin-info-box small {
+      display: block;
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .admin-info-box ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .admin-info-box ul li + li {
+      margin-top: 5px;
+    }
+
+    /* ====== SECTION KHUSUS DATA ====== */
+
+    .admin-filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+
+    .admin-filter-row .admin-input {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #d0d5dd;
+      min-width: 200px;
+      font-size: 13px;
+    }
+
+    .admin-filter-row .admin-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 13px;
+      cursor: pointer;
+      background: var(--inv, #009bb7);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .admin-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 11px;
+      border-radius: 999px;
+      border: 1px solid #d0d5dd;
+      color: #64748b;
+      margin-right: 6px;
+      margin-bottom: 4px;
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 991px) {
+
+      .admin-sidebar {
+        transform: translateX(-100%);
+      }
+
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
+
+      .admin-main {
+        margin-left: 0;
+      }
+
+      .admin-sidebar-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .admin-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .admin-flex-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 575px) {
+      .admin-cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-topbar {
+        padding-inline: 12px;
+      }
+
+      .admin-content {
+        padding: 14px 12px 20px;
+      }
+
+      .admin-topbar-title {
+        font-size: 16px;
+      }
+
+      table.admin-table {
+        font-size: 12px;
+      }
+
+      table.admin-table th,
+      table.admin-table td {
+        padding: 6px 8px;
+      }
+    }
+  </style>
+</head>
+
+<body class="admin-body">
+
+  <!-- Wrapper utama -->
+  <div class="admin-wrapper">
+
+    <!-- Sidebar kiri -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-sidebar-header">
+        <div class="admin-sidebar-logo">
+          <i class="fa fa-shield"></i>
+          <div>
+            <div>LSP PLGM</div>
+            <span class="badge">Admin Panel</span>
+          </div>
+        </div>
+      </div>
+
+      <ul class="admin-sidebar-menu" id="adminSidebarMenu">
+        <li>
+          <a href="#" class="admin-nav-link active" data-section="section-dashboard">
+            <i class="fa fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="admin-nav-link" data-section="section-asesi">
+            <i class="fa fa-users"></i>
+            <span>Data Asesi</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="admin-nav-link" data-section="section-asesor">
+            <i class="fa fa-user-circle"></i>
+            <span>Data Asesor</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="admin-nav-link" data-section="section-skema">
+            <i class="fa fa-list-alt"></i>
+            <span>Skema Sertifikasi</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="admin-nav-link" data-section="section-jadwal">
+            <i class="fa fa-calendar"></i>
+            <span>Jadwal Uji Kompetensi</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="admin-nav-link" data-section="section-berkas">
+            <i class="fa fa-folder-open"></i>
+            <span>Berkas / Dokumen</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="admin-nav-link" data-section="section-pengaturan">
+            <i class="fa fa-cog"></i>
+            <span>Pengaturan Akun</span>
+          </a>
+        </li>
+        <li>
+          <a href="index.html" class="admin-nav-link">
+            <i class="fa fa-sign-out"></i>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="admin-sidebar-footer">
+        <div>LSP PLGM &copy; 2025</div>
+        <div style="margin-top:4px;">Sistem Informasi Sertifikasi</div>
+      </div>
+    </aside>
+
+    <!-- Overlay untuk mobile -->
+    <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+    <!-- Area kanan: topbar + konten -->
+    <div class="admin-main">
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="admin-topbar-left">
+          <button class="admin-sidebar-toggle" id="adminSidebarToggle" aria-label="Toggle sidebar">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div>
+            <div class="admin-topbar-title" id="adminPageTitle">Dashboard Admin LSP PLGM</div>
+            <div class="admin-topbar-subtitle">Ringkasan aktivitas dan data terkini</div>
+          </div>
+        </div>
+        <div class="admin-topbar-right">
+          <button class="admin-icon-btn" type="button">
+            <i class="fa fa-bell"></i>
+            <span class="admin-icon-badge">3</span>
+          </button>
+          <div class="admin-user-info">
+            <div class="admin-user-avatar">A</div>
+            <div>
+              <div class="admin-user-name">Admin LSP PLGM</div>
+              <div class="admin-user-role">Administrator</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Konten utama -->
+      <main class="admin-content">
+
+        <!-- =============== SECTION: DASHBOARD (DEFAULT) =============== -->
+        <section id="section-dashboard" class="admin-section active">
+          <div class="admin-section-header">
+            <h2>Dashboard</h2>
+            <p>Ringkasan data LSP PLGM dan jadwal uji kompetensi.</p>
+          </div>
+
+          <!-- Cards ringkasan -->
+          <div class="admin-cards-grid">
+            <!-- Card: Total Asesi -->
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <div class="admin-card-title">Total Asesi Terdaftar</div>
+                <div class="admin-card-icon">
+                  <i class="fa fa-users"></i>
+                </div>
+              </div>
+              <div class="admin-card-value">120</div>
+              <div class="admin-card-subtext">Asesi aktif di seluruh skema</div>
+            </div>
+
+            <!-- Card: Total Asesor -->
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <div class="admin-card-title">Total Asesor</div>
+                <div class="admin-card-icon">
+                  <i class="fa fa-user-circle"></i>
+                </div>
+              </div>
+              <div class="admin-card-value">18</div>
+              <div class="admin-card-subtext">Asesor kompeten terdaftar</div>
+            </div>
+
+            <!-- Card: Total Skema -->
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <div class="admin-card-title">Skema Sertifikasi</div>
+                <div class="admin-card-icon">
+                  <i class="fa fa-list-alt"></i>
+                </div>
+              </div>
+              <div class="admin-card-value">7</div>
+              <div class="admin-card-subtext">Skema aktif yang tersedia</div>
+            </div>
+
+            <!-- Card: Jadwal Bulan Ini -->
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <div class="admin-card-title">Jadwal Bulan Ini</div>
+                <div class="admin-card-icon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+              </div>
+              <div class="admin-card-value">5</div>
+              <div class="admin-card-subtext">Sesi uji kompetensi terjadwal</div>
+            </div>
+          </div>
+
+          <!-- Tabel + Pengumuman -->
+          <div class="admin-flex-row">
+            <!-- Tabel Jadwal Terbaru -->
+            <div class="admin-table-wrapper">
+              <div class="admin-table-title">
+                <span>Jadwal Uji Kompetensi Terbaru</span>
+                <span class="sub">Data dummy untuk tampilan awal</span>
+              </div>
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Tanggal</th>
+                    <th>Skema</th>
+                    <th>TUK</th>
+                    <th>Jumlah Asesi</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>05-12-2025</td>
+                    <td>Digital Marketing</td>
+                    <td>TUK Kampus Utama</td>
+                    <td>20</td>
+                    <td><span class="admin-badge admin-badge-info">Terjadwal</span></td>
+                  </tr>
+                  <tr>
+                    <td>10-12-2025</td>
+                    <td>Operator Komputer</td>
+                    <td>TUK Lab Komputer 1</td>
+                    <td>15</td>
+                    <td><span class="admin-badge admin-badge-warning">Menunggu Konfirmasi</span></td>
+                  </tr>
+                  <tr>
+                    <td>14-12-2025</td>
+                    <td>Administrasi Perkantoran</td>
+                    <td>TUK Kampus II</td>
+                    <td>18</td>
+                    <td><span class="admin-badge admin-badge-info">Terjadwal</span></td>
+                  </tr>
+                  <tr>
+                    <td>20-12-2025</td>
+                    <td>Digital Marketing</td>
+                    <td>TUK Kampus Utama</td>
+                    <td>22</td>
+                    <td><span class="admin-badge admin-badge-success">Selesai</span></td>
+                  </tr>
+                  <tr>
+                    <td>28-12-2025</td>
+                    <td>Operator Komputer</td>
+                    <td>TUK Lab Komputer 2</td>
+                    <td>12</td>
+                    <td><span class="admin-badge admin-badge-info">Terjadwal</span></td>
+                  </tr>
+                  <tr>
+                    <td>04-01-2026</td>
+                    <td>Administrasi Perkantoran</td>
+                    <td>TUK Kampus III</td>
+                    <td>16</td>
+                    <td><span class="admin-badge admin-badge-muted">Draft</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Box Pengumuman -->
+            <div class="admin-info-box">
+              <h3>Pengumuman</h3>
+              <small>Informasi penting untuk admin & asesor</small>
+              <ul>
+                <li>Pastikan data asesi telah diverifikasi sebelum jadwal uji dimulai.</li>
+                <li>Upload berita acara dan dokumen pendukung maksimal H+3 setelah uji kompetensi.</li>
+                <li>Jadwal uji bulan depan sedang disusun, koordinasi dengan TUK terkait ketersediaan lab.</li>
+                <li>Seluruh asesor wajib memperbarui profil dan masa berlaku sertifikat asesor.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============== SECTION: DATA ASESI =============== -->
+        <section id="section-asesi" class="admin-section">
+          <div class="admin-section-header">
+            <h2>Data Asesi</h2>
+            <p>Daftar asesi yang terdaftar dalam sistem LSP PLGM.</p>
+          </div>
+
+          <div class="admin-filter-row">
+            <input type="text" class="admin-input" placeholder="Cari nama / NIK / skema (dummy search)">
+            <button class="admin-btn" type="button">
+              <i class="fa fa-search"></i> Filter
+            </button>
+            <span style="font-size: 12px; color: #777;">Fitur ini hanya tampilan (dummy), belum terkoneksi database.</span>
+          </div>
+
+          <div class="admin-table-wrapper">
+            <div class="admin-table-title">
+              <span>Daftar Asesi</span>
+              <span class="sub">Contoh data dummy</span>
+            </div>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama Asesi</th>
+                  <th>NIK</th>
+                  <th>Skema</th>
+                  <th>TUK</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Andi Pratama</td>
+                  <td>3273*********01</td>
+                  <td>Digital Marketing</td>
+                  <td>TUK Kampus Utama</td>
+                  <td><span class="admin-badge admin-badge-success">Sudah Uji</span></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Siti Lestari</td>
+                  <td>3273*********02</td>
+                  <td>Operator Komputer</td>
+                  <td>TUK Lab Komputer 1</td>
+                  <td><span class="admin-badge admin-badge-info">Terjadwal</span></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Budi Santoso</td>
+                  <td>3273*********03</td>
+                  <td>Administrasi Perkantoran</td>
+                  <td>TUK Kampus II</td>
+                  <td><span class="admin-badge admin-badge-warning">Belum Lengkap</span></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Dewi Anggraeni</td>
+                  <td>3273*********04</td>
+                  <td>Digital Marketing</td>
+                  <td>TUK Kampus Utama</td>
+                  <td><span class="admin-badge admin-badge-info">Terjadwal</span></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Rizki Ramadhan</td>
+                  <td>3273*********05</td>
+                  <td>Operator Komputer</td>
+                  <td>TUK Lab Komputer 2</td>
+                  <td><span class="admin-badge admin-badge-muted">Draft</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- =============== SECTION: DATA ASESOR =============== -->
+        <section id="section-asesor" class="admin-section">
+          <div class="admin-section-header">
+            <h2>Data Asesor</h2>
+            <p>Daftar asesor kompetensi di LSP PLGM.</p>
+          </div>
+
+          <div class="admin-table-wrapper">
+            <div class="admin-table-title">
+              <span>Daftar Asesor</span>
+              <span class="sub">Contoh data dummy</span>
+            </div>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama Asesor</th>
+                  <th>No. Registrasi</th>
+                  <th>Skema Keahlian</th>
+                  <th>Status Sertifikat</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Drs. Hendra Saputra</td>
+                  <td>ASESOR-001</td>
+                  <td>Digital Marketing</td>
+                  <td><span class="admin-badge admin-badge-success">Aktif</span></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Nur Aisyah, S.Kom</td>
+                  <td>ASESOR-002</td>
+                  <td>Operator Komputer</td>
+                  <td><span class="admin-badge admin-badge-success">Aktif</span></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Muhammad Rafi, SE</td>
+                  <td>ASESOR-003</td>
+                  <td>Administrasi Perkantoran</td>
+                  <td><span class="admin-badge admin-badge-warning">Perlu Perpanjangan</span></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Intan Permatasari</td>
+                  <td>ASESOR-004</td>
+                  <td>Digital Marketing</td>
+                  <td><span class="admin-badge admin-badge-success">Aktif</span></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Yudi Firmansyah</td>
+                  <td>ASESOR-005</td>
+                  <td>Operator Komputer</td>
+                  <td><span class="admin-badge admin-badge-muted">Nonaktif</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- =============== SECTION: SKEMA SERTIFIKASI =============== -->
+        <section id="section-skema" class="admin-section">
+          <div class="admin-section-header">
+            <h2>Skema Sertifikasi</h2>
+            <p>Daftar skema sertifikasi yang dikelola oleh LSP PLGM.</p>
+          </div>
+
+          <div style="margin-bottom: 12px;">
+            <span class="admin-tag">Total Skema: 7</span>
+            <span class="admin-tag">Kategori: Digital & Perkantoran</span>
+          </div>
+
+          <div class="admin-table-wrapper">
+            <div class="admin-table-title">
+              <span>Daftar Skema Sertifikasi</span>
+              <span class="sub">Contoh data dummy</span>
+            </div>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Kode Skema</th>
+                  <th>Nama Skema</th>
+                  <th>Jenis</th>
+                  <th>Jumlah Unit</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>SKM-DM-01</td>
+                  <td>Digital Marketing</td>
+                  <td>KKNI</td>
+                  <td>10 Unit</td>
+                  <td><span class="admin-badge admin-badge-success">Aktif</span></td>
+                </tr>
+                <tr>
+                  <td>SKM-OP-01</td>
+                  <td>Operator Komputer</td>
+                  <td>KKNI</td>
+                  <td>8 Unit</td>
+                  <td><span class="admin-badge admin-badge-success">Aktif</span></td>
+                </tr>
+                <tr>
+                  <td>SKM-AP-01</td>
+                  <td>Administrasi Perkantoran</td>
+                  <td>KKNI</td>
+                  <td>9 Unit</td>
+                  <td><span class="admin-badge admin-badge-success">Aktif</span></td>
+                </tr>
+                <tr>
+                  <td>SKM-DM-02</td>
+                  <td>Digital Marketing Lanjutan</td>
+                  <td>KKNI</td>
+                  <td>11 Unit</td>
+                  <td><span class="admin-badge admin-badge-info">Pengembangan</span></td>
+                </tr>
+                <tr>
+                  <td>SKM-OP-02</td>
+                  <td>Operator Komputer Tingkat Lanjut</td>
+                  <td>KKNI</td>
+                  <td>7 Unit</td>
+                  <td><span class="admin-badge admin-badge-info">Draft</span></td>
+                </tr>
+                <tr>
+                  <td>SKM-AP-02</td>
+                  <td>Administrasi Perkantoran Modern</td>
+                  <td>KKNI</td>
+                  <td>10 Unit</td>
+                  <td><span class="admin-badge admin-badge-warning">Review</span></td>
+                </tr>
+                <tr>
+                  <td>SKM-SP-01</td>
+                  <td>Special Program Sertifikasi Internal</td>
+                  <td>Internal</td>
+                  <td>5 Unit</td>
+                  <td><span class="admin-badge admin-badge-muted">Nonaktif</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- =============== SECTION: JADWAL UJI KOMPETENSI =============== -->
+        <section id="section-jadwal" class="admin-section">
+          <div class="admin-section-header">
+            <h2>Jadwal Uji Kompetensi</h2>
+            <p>Kelola dan pantau jadwal uji kompetensi di seluruh TUK.</p>
+          </div>
+
+          <div class="admin-info-box">
+            <h3>Informasi</h3>
+            <small>Section ini masih berupa template (dummy).</small>
+            <ul>
+              <li>Di sini nantinya kamu bisa menambahkan form untuk membuat jadwal baru.</li>
+              <li>Data jadwal dapat dihubungkan dengan tabel jadwal di halaman dashboard.</li>
+              <li>Gunakan struktur tabel yang mirip dengan "Jadwal Uji Kompetensi Terbaru".</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- =============== SECTION: BERKAS / DOKUMEN =============== -->
+        <section id="section-berkas" class="admin-section">
+          <div class="admin-section-header">
+            <h2>Berkas / Dokumen</h2>
+            <p>Tempat mengelola dokumen penting terkait uji kompetensi.</p>
+          </div>
+
+          <div class="admin-info-box">
+            <h3>Template Manajemen Dokumen</h3>
+            <small>Contoh daftar jenis dokumen:</small>
+            <ul>
+              <li>Form APL-01 & APL-02</li>
+              <li>Berita Acara Uji Kompetensi</li>
+              <li>Daftar Hadir Asesi & Asesor</li>
+              <li>Laporan Hasil Asesmen</li>
+            </ul>
+            <p style="font-size: 12px; color:#777; margin-top:10px;">
+              Untuk saat ini, bagian ini hanya tampilan. Nantinya bisa ditambahkan fitur upload, download, dan manajemen folder.
+            </p>
+          </div>
+        </section>
+
+        <!-- =============== SECTION: PENGATURAN AKUN =============== -->
+        <section id="section-pengaturan" class="admin-section">
+          <div class="admin-section-header">
+            <h2>Pengaturan Akun</h2>
+            <p>Kelola profil dan keamanan akun admin.</p>
+          </div>
+
+          <div class="admin-info-box">
+            <h3>Profil Admin</h3>
+            <small>Form dummy untuk tampilan awal.</small>
+            <form>
+              <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px; margin-top:8px; margin-bottom:12px;">
+                <div>
+                  <label style="font-size:12px; color:#555; display:block; margin-bottom:4px;">Nama Lengkap</label>
+                  <input type="text" class="admin-input" value="Admin LSP PLGM">
+                </div>
+                <div>
+                  <label style="font-size:12px; color:#555; display:block; margin-bottom:4px;">Email</label>
+                  <input type="email" class="admin-input" value="admin@lspplgm.id">
+                </div>
+                <div>
+                  <label style="font-size:12px; color:#555; display:block; margin-bottom:4px;">Username</label>
+                  <input type="text" class="admin-input" value="admin_lsp">
+                </div>
+                <div>
+                  <label style="font-size:12px; color:#555; display:block; margin-bottom:4px;">No. HP</label>
+                  <input type="text" class="admin-input" value="+62 8xxx-xxxx-xxx">
+                </div>
+              </div>
+
+              <div style="margin-bottom:12px;">
+                <label style="font-size:12px; color:#555; display:block; margin-bottom:4px;">Kata Sandi Baru</label>
+                <input type="password" class="admin-input" placeholder="********">
+                <small style="font-size:11px; color:#888;">Untuk saat ini hanya tampilan, belum ada proses penyimpanan.</small>
+              </div>
+
+              <button type="button" class="admin-btn">
+                <i class="fa fa-save"></i> Simpan Perubahan
+              </button>
+            </form>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- JS LOGIKA DASHBOARD ADMIN -->
+  <script>
+    // ----- Toggle sidebar (mobile) -----
+    (function () {
+      var sidebar = document.getElementById('adminSidebar');
+      var sidebarToggle = document.getElementById('adminSidebarToggle');
+      var sidebarOverlay = document.getElementById('adminSidebarOverlay');
+
+      function openSidebar() {
+        if (!sidebar) return;
+        sidebar.classList.add('open');
+        if (sidebarOverlay) {
+          sidebarOverlay.classList.add('active');
+        }
+      }
+
+      function closeSidebar() {
+        if (!sidebar) return;
+        sidebar.classList.remove('open');
+        if (sidebarOverlay) {
+          sidebarOverlay.classList.remove('active');
+        }
+      }
+
+      if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function () {
+          if (sidebar.classList.contains('open')) {
+            closeSidebar();
+          } else {
+            openSidebar();
+          }
+        });
+      }
+
+      if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeSidebar);
+      }
+
+      // Tutup sidebar saat resize ke desktop
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 991) {
+          closeSidebar();
+        }
+      });
+    })();
+
+    // ----- Navigasi antar section -----
+    (function () {
+      var navLinks = document.querySelectorAll('.admin-nav-link[data-section]');
+      var sections = document.querySelectorAll('.admin-section');
+      var pageTitle = document.getElementById('adminPageTitle');
+
+      function setActiveSection(sectionId, titleText) {
+        // Ganti class active di menu
+        navLinks.forEach(function (link) {
+          link.classList.toggle('active', link.getAttribute('data-section') === sectionId);
+        });
+
+        // Tampilkan section yang sesuai
+        sections.forEach(function (section) {
+          section.classList.toggle('active', section.id === sectionId);
+        });
+
+        // Ubah judul di topbar
+        if (pageTitle && titleText) {
+          pageTitle.textContent = titleText;
+        }
+
+        // Tutup sidebar jika di mobile
+        var sidebar = document.getElementById('adminSidebar');
+        var overlay = document.getElementById('adminSidebarOverlay');
+        if (window.innerWidth <= 991 && sidebar && overlay) {
+          sidebar.classList.remove('open');
+          overlay.classList.remove('active');
+        }
+      }
+
+      navLinks.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          var targetSection = link.getAttribute('data-section');
+          if (!targetSection) return;
+
+          var titleText = link.querySelector('span') ? link.querySelector('span').textContent : 'Dashboard Admin LSP PLGM';
+          setActiveSection(targetSection, 'Admin - ' + titleText);
+        });
+      });
+    })();
+  </script>
+
+</body>
+
+</html>

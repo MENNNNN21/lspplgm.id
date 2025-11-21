@@ -1383,4 +1383,202 @@ a.btn-tentang:hover {
   border-color: transparent transparent #dc3545 transparent;
 }
 
+/* css/dashboard-style.css */
 
+body {
+    overflow-x: hidden;
+    background-color: #f5f7fa; /* Background abu-abu sangat muda agar konten putih menonjol */
+    font-family: 'Open Sans', sans-serif; /* Sesuaikan dengan font project */
+}
+
+/* --- WRAPPER & SIDEBAR CONFIG --- */
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #ffffff; /* Putih Bersih */
+    border-right: 1px solid #e7e7e7;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 70px 20px 20px 20px; /* Top padding untuk kompensasi navbar fixed */
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* --- SIDEBAR CONTENT --- */
+.sidebar-brand {
+    height: 65px;
+    line-height: 60px;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebar-brand img {
+    max-height: 45px;
+    width: auto;
+}
+
+.sidebar-nav {
+    padding: 0;
+    list-style: none;
+    margin-top: 20px;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 45px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #555;
+    border-left: 4px solid transparent;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li.active a {
+    text-decoration: none;
+    color: #337ab7; /* Warna Biru Utama Bootstrap */
+    background: #f9f9f9;
+    border-left: 4px solid #337ab7;
+}
+
+.sidebar-nav li a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* --- NAVBAR MODERNIZATION --- */
+.navbar-custom {
+    background-color: #fff;
+    border: none;
+    border-bottom: 1px solid #e7e7e7;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    height: 60px;
+}
+
+.navbar-custom .navbar-brand {
+    display: none; /* Logo sudah ada di sidebar */
+}
+
+.navbar-nav > li > a {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #777;
+}
+
+/* --- CONTENT CARDS / PANELS (MODERN FLAT LOOK) --- */
+.panel-clean {
+    border: 1px solid #e7e7e7;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    background: #fff;
+    margin-bottom: 20px;
+}
+
+.panel-clean .panel-heading {
+    background-color: #fff;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 15px 20px;
+    font-weight: 700;
+    color: #444;
+    font-size: 16px;
+}
+
+.panel-clean .panel-body {
+    padding: 20px;
+}
+
+/* Status Box Styling */
+.status-box {
+    border-left: 5px solid #f0ad4e; /* Bootstrap Warning Color */
+    padding: 20px;
+    background: #fff8e1;
+    color: #8a6d3b;
+    border-radius: 4px;
+}
+
+/* Table Styling */
+.table > thead > tr > th {
+    border-bottom: 2px solid #f0f0f0;
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.table > tbody > tr > td {
+    vertical-align: middle;
+    padding: 12px 8px;
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+    #sidebar-wrapper {
+        width: 250px;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+    #page-content-wrapper {
+        padding: 80px 30px 30px 30px;
+        position: relative;
+    }
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+@media(max-width:767px) {
+    /* Pada Mobile, Sidebar muncul jika ditoggle */
+    #wrapper {
+        padding-left: 0;
+    }
+    #sidebar-wrapper {
+        width: 0;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        width: 250px;
+    }
+}
