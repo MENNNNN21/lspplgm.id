@@ -42,6 +42,170 @@
 
   <!-- Style khusus halaman daftar (boleh dipindah ke custom.css) -->
   <style>
+    .section-label {
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      color: #0d47a1;
+    }
+
+    .daftar-header-modern {
+      padding-top: 130px;
+      padding-bottom: 40px;
+      text-align: center;
+      position: relative;
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+      color: #fff;
+    }
+
+    .daftar-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .daftar-underline {
+      width: 60px;
+      height: 4px;
+      background: #ffca28;
+      border-radius: 10px;
+      margin: 0 auto;
+    }
+
+    .daftar-deco .about-logo-modern {
+      position: absolute;
+      right: 15px;
+      bottom: 10px;
+      width: 90px;
+      opacity: 0.15;
+    }
+
+    @media (max-width: 767.98px) {
+      .daftar-header-modern {
+        padding-top: 110px;
+        padding-bottom: 30px;
+      }
+
+      .daftar-title {
+        font-size: 24px;
+      }
+
+      .daftar-deco .about-logo-modern {
+        display: none;
+      }
+    }
+
+    /* Tooltip error password */
+    .error-tooltip {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #dc3545;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      white-space: nowrap;
+      z-index: 5;
+    }
+
+    /* Pesan error tanda tangan */
+    .signature-error {
+      font-size: 13px;
+      color: #dc3545;
+      display: none;
+    }
+
+    /* Modal backdrop tanda tangan */
+    .signature-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(2px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    /* Kotak modal tanda tangan */
+    .signature-modal {
+      width: 90%;
+      max-width: 520px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.3);
+      overflow: hidden;
+    }
+
+    .signature-modal-header {
+      padding: 12px 18px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .signature-modal-header button {
+      border: none;
+      background: transparent;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      color: #64748b;
+    }
+
+    .signature-modal-body {
+      padding: 16px 18px;
+    }
+
+    .signature-pad {
+      background: #ffffff;
+      border-radius: 6px;
+      border: 1px solid #cfd8e3;
+      overflow: hidden;
+    }
+
+    #signature-canvas {
+      width: 100%;
+      max-width: 100%;
+      height: 200px;
+      display: block;
+      cursor: crosshair;
+    }
+
+    .signature-modal-footer {
+      padding: 10px 18px 14px;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .signature-modal-footer .btn {
+      min-width: 90px;
+    }
+
+    /* Link "Masukkan Tanda Tangan" */
+    .signature-link {
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* Preview tanda tangan di form */
+    #signature-preview-img {
+      max-height: 120px;
+    }
   </style>
 
   <!--[if lt IE 9]>
@@ -317,13 +481,36 @@
                 </div>
                 <div class="col-md-6 mb-3">
                   <div class="position-relative">
-                  <label for="password_confirmation" class="form-label">Konfirmasi Password
-                    <span class="text-danger">*</span></label>
-                  <input type="password" class="form-control" id="password_confirmation" required>
-                  <div id="tooltip-password" class="error-tooltip">Password tidak sama</div>
-                </div>
+                    <label for="password_confirmation" class="form-label">Konfirmasi Password
+                      <span class="text-danger">*</span></label>
+                    <input type="password" class="form-control" id="password_confirmation" required>
+                    <div id="tooltip-password" class="error-tooltip">Password tidak sama</div>
+                  </div>
                 </div>
               </div>
+
+              <!-- TANDA TANGAN DIGITAL (VIA MODAL) -->
+              <div class="section-label">E. Tanda Tangan Digital</div>
+              <div class="mb-3">
+                <label class="form-label d-block">Tanda Tangan Peserta <span class="text-danger">*</span></label>
+                <span id="open-signature-modal" class="text-primary signature-link">
+                  <button class="btn btn-sm btn-primary"> Tanda Tangan</button>
+                </span>
+                <small class="text-muted d-block mt-1">
+                  Tanda tangan ini digunakan sebagai bentuk persetujuan atas data yang Anda isi pada formulir ini.
+                </small>
+
+                <!-- Preview tanda tangan setelah disimpan -->
+                <div id="signature-preview" class="mt-2" style="display:none;">
+                  <img src="" id="signature-preview-img" class="img-fluid border rounded">
+                </div>
+
+                <div id="signature-error" class="signature-error mt-1">
+                  Silakan isi tanda tangan digital terlebih dahulu.
+                </div>
+
+                <!-- Hidden input untuk menyimpan data gambar (Base64) -->
+                <input type="hidden" name="ttd_digital" id="ttd_digital" required>
               </div>
 
               <div class="mb-3 form-check">
@@ -337,8 +524,36 @@
                 <button type="submit" class="btn btn-primary btn-lg">Daftar Sekarang</button>
               </div>
             </form>
-          </div>
+
+          </div><!-- card-body -->
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL TANDA TANGAN -->
+  <div class="signature-modal-backdrop" id="signature-modal-backdrop">
+    <div class="signature-modal">
+      <div class="signature-modal-header">
+        <span>Tanda Tangan</span>
+        <button type="button" class="close-signature-modal" aria-label="Close">&times;</button>
+      </div>
+      <div class="signature-modal-body">
+        <div class="signature-pad">
+          <canvas id="signature-canvas" width="600" height="200"></canvas>
+        </div>
+      </div>
+      <div class="signature-modal-footer">
+        <button type="button" class="btn btn-light" id="btn-signature-cancel">Batal</button>
+        <button type="button" class="btn btn-danger" id="btn-signature-clear">Hapus Kanvas</button>
+
+        <label class="btn btn-success mb-0">
+        Upload Signature
+        <input type="file" id="signature-upload" accept=".jpg,.jpeg,.png" style="display:none;">
+        </label>
+
+
+        <button type="button" class="btn btn-primary" id="btn-signature-save">Simpan</button>
       </div>
     </div>
   </div>
@@ -409,90 +624,287 @@
   <script src="js/contact_me.js"></script>
   <!-- ALL PLUGINS -->
   <script src="js/custom.js"></script>
-  
 
-  <!-- SCRIPT VALIDASI + NAVBAR -->
- <script>
-  // === VALIDASI PASSWORD SAMA (REAL-TIME) ===
-  const formDaftar   = document.getElementById('daftarForm');
-  const password     = document.getElementById('password');
-  const passwordConf = document.getElementById('password_confirmation');
+  <!-- SCRIPT VALIDASI + NAVBAR + MODAL TANDA TANGAN -->
+  <script>
+    // === VALIDASI PASSWORD SAMA (REAL-TIME) ===
+    const formDaftar = document.getElementById('daftarForm');
+    const password = document.getElementById('password');
+    const passwordConf = document.getElementById('password_confirmation');
 
- function validatePasswordMatch() {
-  const tooltip = document.getElementById('tooltip-password');
+    function validatePasswordMatch() {
+      const tooltip = document.getElementById('tooltip-password');
 
-  if (password.value !== passwordConf.value) {
-    tooltip.style.display = 'block';
-  } else {
-    tooltip.style.display = 'none';
-  }
-}
-
-passwordConf.addEventListener('input', validatePasswordMatch);
-password.addEventListener('input', validatePasswordMatch);
-
-
-
-
-  // cek setiap kali user mengetik di password / konfirmasi
-
-  // validasi saat submit (backup)
-  formDaftar.addEventListener('submit', function (e) {
-    validatePasswordMatch();
-
-    if (!this.checkValidity()) {
-      e.preventDefault();
-      e.stopPropagation();
+      if (password.value !== passwordConf.value) {
+        tooltip.style.display = 'block';
+      } else {
+        tooltip.style.display = 'none';
+      }
     }
 
-    this.classList.add('was-validated');
-  }, false);
+    passwordConf.addEventListener('input', validatePasswordMatch);
+    password.addEventListener('input', validatePasswordMatch);
 
-  // === SCRIPT NAVBAR MOBILE MU TETAP DI BAWAH INI ===
-  const navToggle = document.querySelector('.mobile-nav-toggle');
-  const navMenu   = document.querySelector('#navbar ul');
+    // === MODAL TANDA TANGAN ===
+    const signatureModalBackdrop = document.getElementById('signature-modal-backdrop');
+    const openSignatureModalBtn = document.getElementById('open-signature-modal');
+    const closeSignatureBtns = document.querySelectorAll('.close-signature-modal, #btn-signature-cancel');
+    const signatureCanvas = document.getElementById('signature-canvas');
+    const clearSignatureBtn = document.getElementById('btn-signature-clear');
+    const saveSignatureBtn = document.getElementById('btn-signature-save');
+    const uploadSignatureInput = document.getElementById('signature-upload');
+    const signatureInputHidden = document.getElementById('ttd_digital');
+    const signatureError = document.getElementById('signature-error');
+    const signaturePreview = document.getElementById('signature-preview');
+    const signaturePreviewImg = document.getElementById('signature-preview-img');
 
-  if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('show');
+    let isDrawing = false;
+    let isSigned = false; // dari canvas
+    let uploadedSignatureData = ''; // dari upload file
+    let lastPos = { x: 0, y: 0 };
 
-      if (navMenu.classList.contains('show')) {
-        navToggle.classList.remove('bi-list');
-        navToggle.classList.add('bi-x');
-      } else {
-        navToggle.classList.remove('bi-x');
-        navToggle.classList.add('bi-list');
+    function openSignatureModal() {
+      signatureModalBackdrop.style.display = 'flex';
+      resizeCanvas();
+    }
+
+    function closeSignatureModal() {
+      signatureModalBackdrop.style.display = 'none';
+    }
+
+    if (openSignatureModalBtn) {
+      openSignatureModalBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        openSignatureModal();
+      });
+    }
+
+    closeSignatureBtns.forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        closeSignatureModal();
+      });
+    });
+
+    // klik di luar modal menutup modal
+    signatureModalBackdrop.addEventListener('click', function (e) {
+      if (e.target === signatureModalBackdrop) {
+        closeSignatureModal();
       }
     });
-  }
 
-  document.querySelectorAll('#navbar a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 991 && link.parentElement.classList.contains('dropdown')) {
-        return;
+    // CANVAS DRAW
+    if (signatureCanvas) {
+      const ctx = signatureCanvas.getContext('2d');
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#333';
+
+      function resizeCanvas() {
+        // Scale canvas mengikuti lebar container
+        const rect = signatureCanvas.getBoundingClientRect();
+        const ratio = window.devicePixelRatio || 1;
+
+        signatureCanvas.width = rect.width * ratio;
+        signatureCanvas.height = 200 * ratio;
+        ctx.scale(ratio, ratio);
+        ctx.lineWidth = 2;
       }
 
-      if (navMenu && navMenu.classList.contains('show')) {
-        navMenu.classList.remove('show');
-        if (navToggle) {
+      window.addEventListener('resize', () => {
+        if (signatureModalBackdrop.style.display === 'flex') {
+          resizeCanvas();
+        }
+      });
+
+      function getCanvasPos(e) {
+        const rect = signatureCanvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return {
+          x: clientX - rect.left,
+          y: clientY - rect.top
+        };
+      }
+
+      function startDrawing(e) {
+        e.preventDefault();
+        isDrawing = true;
+        isSigned = true;
+        uploadedSignatureData = ''; // jika mulai menggambar, abaikan upload
+        signatureError.style.display = 'none';
+        const pos = getCanvasPos(e);
+        lastPos = pos;
+      }
+
+      function draw(e) {
+        if (!isDrawing) return;
+        e.preventDefault();
+        const pos = getCanvasPos(e);
+        ctx.beginPath();
+        ctx.moveTo(lastPos.x, lastPos.y);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+        lastPos = pos;
+      }
+
+      function endDrawing(e) {
+        if (!isDrawing) return;
+        e && e.preventDefault();
+        isDrawing = false;
+      }
+
+      // Mouse events
+      signatureCanvas.addEventListener('mousedown', startDrawing);
+      signatureCanvas.addEventListener('mousemove', draw);
+      signatureCanvas.addEventListener('mouseup', endDrawing);
+      signatureCanvas.addEventListener('mouseleave', endDrawing);
+
+      // Touch events
+      signatureCanvas.addEventListener('touchstart', startDrawing, { passive: false });
+      signatureCanvas.addEventListener('touchmove', draw, { passive: false });
+      signatureCanvas.addEventListener('touchend', endDrawing, { passive: false });
+
+      // Tombol Hapus Kanvas
+      if (clearSignatureBtn) {
+        clearSignatureBtn.addEventListener('click', function () {
+          const rect = signatureCanvas.getBoundingClientRect();
+          ctx.clearRect(0, 0, rect.width, rect.height);
+          isSigned = false;
+          uploadedSignatureData = '';
+          if (signatureInputHidden) signatureInputHidden.value = '';
+          signatureError.style.display = 'none';
+        });
+      }
+    }
+
+    // Upload Signature (gambar)
+   if (uploadSignatureInput) {
+  uploadSignatureInput.addEventListener('change', function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    // validasi tipe file
+    const allowedTypes = ['image/jpeg', 'image/png'];
+    if (!allowedTypes.includes(file.type)) {
+      alert('Format tanda tangan harus JPG atau PNG.');
+      this.value = '';
+      return;
+    }
+
+    // validasi ukuran (2MB)
+    const maxSize = 2 * 1024 * 1024; // 2MB
+    if (file.size > maxSize) {
+      alert('Ukuran file maksimal 2MB.');
+      this.value = '';
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      uploadedSignatureData = e.target.result; // base64
+      isSigned = false;
+      signatureError.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+
+    // Simpan tanda tangan (canvas / upload)
+    if (saveSignatureBtn) {
+      saveSignatureBtn.addEventListener('click', function () {
+        let dataUrl = '';
+
+        if (uploadedSignatureData) {
+          // dari upload file
+          dataUrl = uploadedSignatureData;
+        } else if (isSigned && signatureCanvas) {
+          // dari kanvas
+          dataUrl = signatureCanvas.toDataURL('image/png');
+        }
+
+        if (!dataUrl) {
+          signatureError.style.display = 'block';
+          return;
+        }
+
+        // set ke input hidden
+        signatureInputHidden.value = dataUrl;
+        signatureError.style.display = 'none';
+
+        // tampilkan preview
+        signaturePreviewImg.src = dataUrl;
+        signaturePreview.style.display = 'block';
+
+        closeSignatureModal();
+      });
+    }
+
+    // validasi saat submit (backup)
+    formDaftar.addEventListener('submit', function (e) {
+      // cek password
+      validatePasswordMatch();
+
+      // cek tanda tangan digital
+      if (!signatureInputHidden.value) {
+        e.preventDefault();
+        e.stopPropagation();
+        signatureError.style.display = 'block';
+      }
+
+      if (!this.checkValidity()) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      this.classList.add('was-validated');
+    }, false);
+
+    // === SCRIPT NAVBAR MOBILE (kalau masih dipakai di project lainmu) ===
+    const navToggle = document.querySelector('.mobile-nav-toggle');
+    const navMenu = document.querySelector('#navbar ul');
+
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('show');
+
+        if (navMenu.classList.contains('show')) {
+          navToggle.classList.remove('bi-list');
+          navToggle.classList.add('bi-x');
+        } else {
           navToggle.classList.remove('bi-x');
           navToggle.classList.add('bi-list');
         }
+      });
+    }
+
+    document.querySelectorAll('#navbar a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 991 && link.parentElement.classList.contains('dropdown')) {
+          return;
+        }
+
+        if (navMenu && navMenu.classList.contains('show')) {
+          navMenu.classList.remove('show');
+          if (navToggle) {
+            navToggle.classList.remove('bi-x');
+            navToggle.classList.add('bi-list');
+          }
+        }
+      });
+    });
+
+    window.addEventListener('scroll', function () {
+      var scrolled = window.scrollY || window.pageYOffset;
+
+      if (scrolled > 80) {
+        document.body.classList.add('hide-top-navbar');
+      } else {
+        document.body.classList.remove('hide-top-navbar');
       }
     });
-  });
-
-  window.addEventListener('scroll', function () {
-    var scrolled = window.scrollY || window.pageYOffset;
-
-    if (scrolled > 80) {
-      document.body.classList.add('hide-top-navbar');
-    } else {
-      document.body.classList.remove('hide-top-navbar');
-    }
-  });
-</script>
-
+  </script>
 
 </body>
 
