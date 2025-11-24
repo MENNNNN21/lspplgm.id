@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Pengajuan Skema — Admin LSP PLGM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Style utama project -->
+  <link rel="stylesheet" href="style.css">
+  <!-- CSS khusus admin (isi class .admin-*) -->
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="admin-body">
+  <div class="admin-wrapper">
+
+    <!-- Sidebar kiri -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-sidebar-header">
+        <div class="admin-sidebar-logo">
+          <i class="fa fa-shield"></i>
+          <div>
+            <div>LSP PLGM</div>
+            <span class="badge">Admin Panel</span>
+          </div>
+        </div>
+      </div>
+
+      <ul class="admin-sidebar-menu">
+        <li>
+          <a href="dashboard-admin.html" class="admin-nav-link">
+            <i class="fa fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="asesi.html" class="admin-nav-link">
+            <i class="fa fa-users"></i>
+            <span>Data Asesi</span>
+          </a>
+        </li>
+        <li>
+          <a href="asesor.html" class="admin-nav-link">
+            <i class="fa fa-user-circle"></i>
+            <span>Data Asesor</span>
+          </a>
+        </li>
+        <li>
+          <a href="skema.html" class="admin-nav-link">
+            <i class="fa fa-list-alt"></i>
+            <span>Skema Sertifikasi</span>
+          </a>
+        </li>
+        <li>
+          <a href="jadwal.html" class="admin-nav-link">
+            <i class="fa fa-calendar"></i>
+            <span>Jadwal Uji Kompetensi</span>
+          </a>
+        </li>
+        <li>
+          <a href="berkas.html" class="admin-nav-link">
+            <i class="fa fa-folder-open"></i>
+            <span>Berkas / Dokumen</span>
+          </a>
+        </li>
+        <li>
+          <a href="pengajuan-skema-admin.html" class="admin-nav-link active">
+            <i class="fa fa-file-text"></i>
+            <span>Pengajuan Skema</span>
+          </a>
+        </li>
+        <li>
+          <a href="pengaturan.html" class="admin-nav-link">
+            <i class="fa fa-cog"></i>
+            <span>Pengaturan Akun</span>
+          </a>
+        </li>
+        <li>
+          <a href="index.html" class="admin-nav-link">
+            <i class="fa fa-sign-out"></i>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="admin-sidebar-footer">
+        <div>LSP PLGM &copy; 2025</div>
+        <div style="margin-top:4px;">Sistem Informasi Sertifikasi</div>
+      </div>
+    </aside>
+
+    <!-- Overlay mobile -->
+    <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+    <!-- Area kanan -->
+    <div class="admin-main">
+
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="admin-topbar-left">
+          <button class="admin-sidebar-toggle" id="adminSidebarToggle" aria-label="Toggle sidebar">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div>
+            <div class="admin-topbar-title">Pengajuan Skema Sertifikasi</div>
+            <div class="admin-topbar-subtitle">
+              Kelola pengajuan APL-01 & APL-02 dari asesi.
+            </div>
+          </div>
+        </div>
+        <div class="admin-topbar-right">
+          <button class="admin-icon-btn" type="button">
+            <i class="fa fa-bell"></i>
+            <span class="admin-icon-badge">3</span>
+          </button>
+          <div class="admin-user-info">
+            <div class="admin-user-avatar">A</div>
+            <div>
+              <div class="admin-user-name">Admin LSP PLGM</div>
+              <div class="admin-user-role">Administrator</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Konten utama -->
+      <main class="admin-content">
+
+        <!-- Header section -->
+        <div class="admin-section-header">
+          <h2>Pengajuan Skema Sertifikasi</h2>
+          <p>
+            Daftar pengajuan skema sertifikasi beserta status verifikasinya.
+          </p>
+        </div>
+
+        <!-- Filter bar -->
+        <div class="admin-filter-row">
+          <input type="text" class="admin-input" placeholder="Cari nama asesi / skema / TUK (dummy)">
+          <select class="admin-input">
+            <option value="">Semua Status</option>
+            <option value="draft">Draft</option>
+            <option value="diajukan">Diajukan</option>
+            <option value="verifikasi">Diverifikasi</option>
+            <option value="revisi">Perlu Revisi</option>
+            <option value="tolak">Ditolak</option>
+          </select>
+          <select class="admin-input">
+            <option value="">Semua Skema</option>
+            <option value="dm">Digital Marketing</option>
+            <option value="op">Operator Komputer</option>
+            <option value="ap">Administrasi Perkantoran</option>
+          </select>
+          <button class="admin-btn" type="button">
+            <i class="fa fa-search"></i> Terapkan Filter
+          </button>
+          <span style="font-size: 12px; color:#777;">
+            * Filter masih dummy, hanya tampilan (belum terkoneksi database).
+          </span>
+        </div>
+
+        <!-- Badge ringkasan -->
+        <div style="margin-bottom: 12px;">
+          <span class="admin-tag">Total Pengajuan: 12</span>
+          <span class="admin-tag">Menunggu Verifikasi: 4</span>
+          <span class="admin-tag">Perlu Revisi: 2</span>
+        </div>
+
+        <!-- Layout 2 kolom: kiri tabel list, kanan detail -->
+        <div class="admin-flex-row">
+
+          <!-- Kolom kiri: daftar pengajuan -->
+          <div>
+            <div class="admin-table-wrapper">
+              <div class="admin-table-title">
+                <span>Daftar Pengajuan Skema</span>
+                <span class="sub">Data dummy untuk tampilan awal</span>
+              </div>
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Nama Asesi</th>
+                    <th>Skema</th>
+                    <th>Tanggal Pengajuan</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Andi Pratama</td>
+                    <td>Digital Marketing</td>
+                    <td>05-12-2025</td>
+                    <td><span class="admin-badge admin-badge-info">Diajukan</span></td>
+                    <td>
+                      <button
+                        type="button"
+                        class="admin-btn"
+                        style="padding:4px 8px; font-size:12px;"
+                        onclick="loadDummyDetail('andi')">
+                        Detail
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Siti Lestari</td>
+                    <td>Operator Komputer</td>
+                    <td>30-11-2025</td>
+                    <td><span class="admin-badge admin-badge-warning">Perlu Revisi</span></td>
+                    <td>
+                      <button
+                        type="button"
+                        class="admin-btn"
+                        style="padding:4px 8px; font-size:12px;"
+                        onclick="loadDummyDetail('siti')">
+                        Detail
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Budi Santoso</td>
+                    <td>Administrasi Perkantoran</td>
+                    <td>28-11-2025</td>
+                    <td><span class="admin-badge admin-badge-success">Diverifikasi</span></td>
+                    <td>
+                      <button
+                        type="button"
+                        class="admin-btn"
+                        style="padding:4px 8px; font-size:12px;"
+                        onclick="loadDummyDetail('budi')">
+                        Detail
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Dewi Anggraeni</td>
+                    <td>Digital Marketing</td>
+                    <td>26-11-2025</td>
+                    <td><span class="admin-badge admin-badge-muted">Draft</span></td>
+                    <td>
+                      <button
+                        type="button"
+                        class="admin-btn"
+                        style="padding:4px 8px; font-size:12px;"
+                        onclick="loadDummyDetail('dewi')">
+                        Detail
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Info kecil -->
+            <p style="font-size:12px; color:#777; margin-top:4px;">
+              Klik tombol <strong>Detail</strong> untuk melihat isi APL-01 &amp; APL-02 pengajuan tersebut.
+            </p>
+          </div>
+
+          <!-- Kolom kanan: detail pengajuan -->
+          <div>
+            <div class="admin-info-box">
+              <h3>Detail Pengajuan</h3>
+              <small>
+                Ringkasan data APL-01 &amp; APL-02 dari asesi.
+                (Saat ini masih dummy; nanti diisi dari database.)
+              </small>
+
+              <!-- Tab APL -->
+              <div style="display:flex; gap:6px; margin-top:12px; margin-bottom:10px; font-size:13px;">
+                <button
+                  type="button"
+                  id="tab-apl01"
+                  class="admin-btn"
+                  style="padding:6px 10px; font-size:12px;">
+                  APL-01 (Data Asesi)
+                </button>
+                <button
+                  type="button"
+                  id="tab-apl02"
+                  class="admin-btn"
+                  style="padding:6px 10px; font-size:12px; background:#e4e7ec; color:#333;">
+                  APL-02 (Unit &amp; Bukti)
+                </button>
+              </div>
+
+              <!-- Panel APL-01 -->
+              <div id="panel-apl01">
+                <table class="admin-table" style="margin-top:4px;">
+                  <tbody>
+                    <tr>
+                      <th style="width:40%;">Nama Asesi</th>
+                      <td id="detail-nama">Andi Pratama</td>
+                    </tr>
+                    <tr>
+                      <th>NIK</th>
+                      <td id="detail-nik">3273*********01</td>
+                    </tr>
+                    <tr>
+                      <th>Tempat / Tanggal Lahir</th>
+                      <td id="detail-ttl">Bandung, 01-01-2000</td>
+                    </tr>
+                    <tr>
+                      <th>No. HP / WhatsApp</th>
+                      <td id="detail-hp">+62 8xxx-xxxx-xxx</td>
+                    </tr>
+                    <tr>
+                      <th>Pendidikan Terakhir</th>
+                      <td id="detail-pendidikan">S1</td>
+                    </tr>
+                    <tr>
+                      <th>Pekerjaan Saat Ini</th>
+                      <td id="detail-pekerjaan">Staff Marketing di PT Contoh</td>
+                    </tr>
+                    <tr>
+                      <th>Alamat</th>
+                      <td id="detail-alamat">
+                        Jl. Contoh No. 123, Bandung, Jawa Barat
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>Skema yang Diajukan</th>
+                      <td id="detail-skema">
+                        SKM-DM-01 — Digital Marketing
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Panel APL-02 -->
+              <div id="panel-apl02" style="display:none;">
+                <table class="admin-table" style="margin-top:4px;">
+                  <thead>
+                    <tr>
+                      <th>Kode Unit</th>
+                      <th>Judul Unit</th>
+                      <th>Bukti Kompetensi</th>
+                      <th>Keterangan</th>
+                    </tr>
+                  </thead>
+                  <tbody id="detail-unit-list">
+                    <tr>
+                      <td>DM01</td>
+                      <td>Menyusun Strategi Digital Marketing</td>
+                      <td>CV_Andi.pdf, Portofolio_DM01.pdf</td>
+                      <td>Dinyatakan cukup (preview dummy)</td>
+                    </tr>
+                    <tr>
+                      <td>DM02</td>
+                      <td>Melaksanakan Kampanye Digital</td>
+                      <td>Sertifikat_Pelatihan_DM.pdf</td>
+                      <td>Perlu bukti tambahan untuk pengalaman kerja</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <p style="font-size:12px; color:#777; margin-top:6px;">
+                  * Bukti yang tercantum di atas hanyalah contoh. Nanti dapat
+                  dihubungkan ke file dokumen di menu <strong>Berkas / Dokumen</strong>.
+                </p>
+              </div>
+            </div>
+
+            <!-- Panel status pengajuan -->
+            <div class="admin-info-box" style="margin-top:16px;">
+              <h3>Status Pengajuan</h3>
+              <small>Atur status dan catatan balasan untuk asesi.</small>
+
+              <div style="margin-top:10px;">
+                <label style="font-size:12px; color:#555; display:block; margin-bottom:4px;">
+                  Status Pengajuan
+                </label>
+                <select class="admin-input" id="detail-status">
+                  <option value="diajukan">Diajukan</option>
+                  <option value="verifikasi">Diverifikasi</option>
+                  <option value="revisi">Perlu Revisi</option>
+                  <option value="tolak">Ditolak</option>
+                </select>
+              </div>
+
+              <div style="margin-top:10px;">
+                <label style="font-size:12px; color:#555; display:block; margin-bottom:4px;">
+                  Catatan untuk Asesi
+                </label>
+                <textarea
+                  class="admin-input"
+                  id="detail-catatan"
+                  rows="3"
+                  placeholder="Contoh: Mohon lengkapi bukti untuk unit DM02.">
+                </textarea>
+              </div>
+
+              <button
+                type="button"
+                class="admin-btn"
+                style="margin-top:12px;">
+                <i class="fa fa-save"></i> Simpan Status (Dummy)
+              </button>
+
+              <p style="font-size:11px; color:#888; margin-top:6px;">
+                Untuk saat ini, tombol ini hanya tampilan (belum ada proses simpan).
+                Nanti bisa dihubungkan ke backend / database.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- JS: Sidebar + Tab APL + Dummy detail -->
+  <script>
+    // ----- Toggle sidebar (mobile) -----
+    (function () {
+      var sidebar = document.getElementById('adminSidebar');
+      var sidebarToggle = document.getElementById('adminSidebarToggle');
+      var sidebarOverlay = document.getElementById('adminSidebarOverlay');
+
+      function openSidebar() {
+        if (!sidebar) return;
+        sidebar.classList.add('open');
+        if (sidebarOverlay) {
+          sidebarOverlay.classList.add('active');
+        }
+      }
+
+      function closeSidebar() {
+        if (!sidebar) return;
+        sidebar.classList.remove('open');
+        if (sidebarOverlay) {
+          sidebarOverlay.classList.remove('active');
+        }
+      }
+
+      if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function () {
+          if (sidebar.classList.contains('open')) {
+            closeSidebar();
+          } else {
+            openSidebar();
+          }
+        });
+      }
+
+      if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeSidebar);
+      }
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 991) {
+          closeSidebar();
+        }
+      });
+    })();
+
+    // ----- Tab APL-01 / APL-02 -----
+    (function () {
+      var tabApl01 = document.getElementById('tab-apl01');
+      var tabApl02 = document.getElementById('tab-apl02');
+      var panelApl01 = document.getElementById('panel-apl01');
+      var panelApl02 = document.getElementById('panel-apl02');
+
+      if (!tabApl01 || !tabApl02 || !panelApl01 || !panelApl02) return;
+
+      tabApl01.addEventListener('click', function () {
+        panelApl01.style.display = 'block';
+        panelApl02.style.display = 'none';
+        tabApl01.style.background = '';
+        tabApl01.style.color = '#fff';
+        tabApl02.style.background = '#e4e7ec';
+        tabApl02.style.color = '#333';
+      });
+
+      tabApl02.addEventListener('click', function () {
+        panelApl01.style.display = 'none';
+        panelApl02.style.display = 'block';
+        tabApl02.style.background = '';
+        tabApl02.style.color = '#fff';
+        tabApl01.style.background = '#e4e7ec';
+        tabApl01.style.color = '#333';
+      });
+    })();
+
+    // ----- Dummy loader detail pengajuan -----
+    function loadDummyDetail(key) {
+      // Ini hanya contoh, nanti bisa diganti ambil data dari server
+      var nama = document.getElementById('detail-nama');
+      var nik = document.getElementById('detail-nik');
+      var ttl = document.getElementById('detail-ttl');
+      var hp = document.getElementById('detail-hp');
+      var pendidikan = document.getElementById('detail-pendidikan');
+      var pekerjaan = document.getElementById('detail-pekerjaan');
+      var alamat = document.getElementById('detail-alamat');
+      var skema = document.getElementById('detail-skema');
+      var statusSelect = document.getElementById('detail-status');
+      var catatan = document.getElementById('detail-catatan');
+      var unitList = document.getElementById('detail-unit-list');
+
+      if (!nama) return;
+
+      if (key === 'siti') {
+        nama.textContent = 'Siti Lestari';
+        nik.textContent = '3273*********02';
+        ttl.textContent = 'Bandung, 12-02-2001';
+        hp.textContent = '+62 8xxx-xxxx-xxx';
+        pendidikan.textContent = 'D3';
+        pekerjaan.textContent = 'Operator Admin di CV Contoh';
+        alamat.textContent = 'Jl. Sederhana No. 45, Bandung';
+        skema.textContent = 'SKM-OP-01 — Operator Komputer';
+        statusSelect.value = 'revisi';
+        catatan.value = 'Mohon lengkapi bukti untuk unit OP02 (pengalaman kerja minimal 1 tahun).';
+        unitList.innerHTML = `
+          <tr>
+            <td>OP01</td>
+            <td>Mengoperasikan Perangkat Komputer Dasar</td>
+            <td>CV_Siti.pdf, Sertifikat_KomputerDasar.pdf</td>
+            <td>Bukti cukup</td>
+          </tr>
+          <tr>
+            <td>OP02</td>
+            <td>Pengelolaan Dokumen Perkantoran</td>
+            <td>Belum ada bukti pengalaman</td>
+            <td>Perlu bukti tambahan</td>
+          </tr>
+        `;
+      } else if (key === 'budi') {
+        nama.textContent = 'Budi Santoso';
+        nik.textContent = '3273*********03';
+        ttl.textContent = 'Garut, 05-05-1999';
+        hp.textContent = '+62 8xxx-xxxx-xxx';
+        pendidikan.textContent = 'S1';
+        pekerjaan.textContent = 'Staff Administrasi di PT Maju Jaya';
+        alamat.textContent = 'Jl. Raya Garut No. 10, Garut';
+        skema.textContent = 'SKM-AP-01 — Administrasi Perkantoran';
+        statusSelect.value = 'verifikasi';
+        catatan.value = 'Semua bukti sudah lengkap, siap dijadwalkan uji.';
+        unitList.innerHTML = `
+          <tr>
+            <td>AP01</td>
+            <td>Mengelola Dokumen Kantor</td>
+            <td>CV_Budi.pdf, Sertifikat_AP01.pdf</td>
+            <td>OK</td>
+          </tr>
+          <tr>
+            <td>AP02</td>
+            <td>Pengarsipan Dokumen</td>
+            <td>Surat_Keterangan_Kerja.pdf</td>
+            <td>OK</td>
+          </tr>
+        `;
+      } else if (key === 'dewi') {
+        nama.textContent = 'Dewi Anggraeni';
+        nik.textContent = '3273*********04';
+        ttl.textContent = 'Bandung, 20-07-2002';
+        hp.textContent = '+62 8xxx-xxxx-xxx';
+        pendidikan.textContent = 'SMA / SMK';
+        pekerjaan.textContent = 'Freelancer';
+        alamat.textContent = 'Jl. Melati No. 7, Bandung';
+        skema.textContent = 'SKM-DM-01 — Digital Marketing';
+        statusSelect.value = 'draft';
+        catatan.value = 'Pengajuan masih dalam bentuk draft, belum dikirim oleh asesi.';
+        unitList.innerHTML = `
+          <tr>
+            <td>DM01</td>
+            <td>Menyusun Strategi Digital Marketing</td>
+            <td>-</td>
+            <td>Belum diisi</td>
+          </tr>
+        `;
+      } else {
+        // Default: Andi
+        nama.textContent = 'Andi Pratama';
+        nik.textContent = '3273*********01';
+        ttl.textContent = 'Bandung, 01-01-2000';
+        hp.textContent = '+62 8xxx-xxxx-xxx';
+        pendidikan.textContent = 'S1';
+        pekerjaan.textContent = 'Staff Marketing di PT Contoh';
+        alamat.textContent = 'Jl. Contoh No. 123, Bandung, Jawa Barat';
+        skema.textContent = 'SKM-DM-01 — Digital Marketing';
+        statusSelect.value = 'diajukan';
+        catatan.value = 'Pengajuan baru, silakan lakukan verifikasi data.';
+        unitList.innerHTML = `
+          <tr>
+            <td>DM01</td>
+            <td>Menyusun Strategi Digital Marketing</td>
+            <td>CV_Andi.pdf, Portofolio_DM01.pdf</td>
+            <td>Dinyatakan cukup (preview dummy)</td>
+          </tr>
+          <tr>
+            <td>DM02</td>
+            <td>Melaksanakan Kampanye Digital</td>
+            <td>Sertifikat_Pelatihan_DM.pdf</td>
+            <td>Perlu bukti tambahan untuk pengalaman kerja</td>
+          </tr>
+        `;
+      }
+
+      // Scroll ke detail (biar enak di layar kecil)
+      var detailBox = document.querySelector('.admin-info-box');
+      if (detailBox && window.innerWidth <= 991) {
+        detailBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // load default detail (Andi)
+    loadDummyDetail('andi');
+  </script>
+</body>
+
+</html>

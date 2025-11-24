@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Berkas / Dokumen — Admin LSP PLGM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="admin-body">
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-sidebar-header">
+        <div class="admin-sidebar-logo">
+          <i class="fa fa-shield"></i>
+          <div>
+            <div>LSP PLGM</div>
+            <span class="badge">Admin Panel</span>
+          </div>
+        </div>
+      </div>
+
+      <ul class="admin-sidebar-menu">
+        <li><a href="dashboard-admin.html" class="admin-nav-link"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+        <li><a href="asesi.html" class="admin-nav-link"><i class="fa fa-users"></i> <span>Data Asesi</span></a></li>
+        <li><a href="asesor.html" class="admin-nav-link"><i class="fa fa-user-circle"></i> <span>Data Asesor</span></a></li>
+        <li><a href="skema.html" class="admin-nav-link"><i class="fa fa-list-alt"></i> <span>Skema Sertifikasi</span></a></li>
+        <li><a href="jadwal.html" class="admin-nav-link"><i class="fa fa-calendar"></i> <span>Jadwal Uji Kompetensi</span></a></li>
+        <li><a href="berkas.html" class="admin-nav-link active"><i class="fa fa-folder-open"></i> <span>Berkas / Dokumen</span></a></li>
+        <li><a href="pengaturan.html" class="admin-nav-link"><i class="fa fa-cog"></i> <span>Pengaturan Akun</span></a></li>
+        <li><a href="index.html" class="admin-nav-link"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+      </ul>
+
+      <div class="admin-sidebar-footer">
+        <div>LSP PLGM &copy; 2025</div>
+        <div style="margin-top:4px;">Sistem Informasi Sertifikasi</div>
+      </div>
+    </aside>
+
+    <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="admin-topbar-left">
+          <button class="admin-sidebar-toggle" id="adminSidebarToggle" aria-label="Toggle sidebar">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div>
+            <div class="admin-topbar-title">Berkas / Dokumen</div>
+            <div class="admin-topbar-subtitle">Manajemen dokumen pendukung uji kompetensi</div>
+          </div>
+        </div>
+        <div class="admin-topbar-right">
+          <button class="admin-icon-btn" type="button">
+            <i class="fa fa-bell"></i>
+            <span class="admin-icon-badge">3</span>
+          </button>
+          <div class="admin-user-info">
+            <div class="admin-user-avatar">A</div>
+            <div>
+              <div class="admin-user-name">Admin LSP PLGM</div>
+              <div class="admin-user-role">Administrator</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <div class="admin-section-header">
+          <h2>Berkas / Dokumen</h2>
+          <p>Tempat mengelola dokumen penting terkait uji kompetensi.</p>
+        </div>
+
+        <!-- Filter & ringkasan -->
+        <div class="admin-filter-row">
+          <input type="text" class="admin-input" placeholder="Cari nama dokumen / skema / TUK (dummy)">
+          <select class="admin-input">
+            <option value="">Semua kategori</option>
+            <option value="apl">Form APL-01 / APL-02</option>
+            <option value="ba">Berita Acara</option>
+            <option value="hadir">Daftar Hadir</option>
+            <option value="laporan">Laporan Hasil Asesmen</option>
+          </select>
+          <select class="admin-input">
+            <option value="">Status apa saja</option>
+            <option value="lengkap">Lengkap</option>
+            <option value="revisi">Butuh Revisi</option>
+            <option value="draft">Draft</option>
+          </select>
+          <button class="admin-btn" type="button">
+            <i class="fa fa-search"></i> Terapkan Filter
+          </button>
+          <span style="font-size: 12px; color:#777;">
+            * Filter masih dummy, hanya tampilan (belum terkoneksi database).
+          </span>
+        </div>
+
+        <div style="margin-bottom: 12px;">
+          <span class="admin-tag">Total Dokumen: 24</span>
+          <span class="admin-tag">Periode Aktif: 2025</span>
+          <span class="admin-tag">Penyimpanan: Lokal / Cloud</span>
+        </div>
+
+        <!-- Layout 2 kolom: kiri tabel & form, kanan info -->
+        <div class="admin-flex-row">
+          <!-- Kolom kiri -->
+          <div>
+            <!-- Tabel daftar dokumen -->
+            <div class="admin-table-wrapper">
+              <div class="admin-table-title">
+                <span>Daftar Dokumen Uji Kompetensi</span>
+                <span class="sub">Contoh data dummy untuk tampilan awal</span>
+              </div>
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Nama Dokumen</th>
+                    <th>Kategori</th>
+                    <th>Terkait</th>
+                    <th>Tanggal Upload</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>APL-01_DM_05122025.pdf</td>
+                    <td>Form APL-01</td>
+                    <td>Skema Digital Marketing</td>
+                    <td>05-12-2025</td>
+                    <td><span class="admin-badge admin-badge-success">Lengkap</span></td>
+                  </tr>
+                  <tr>
+                    <td>APL-02_DM_05122025.pdf</td>
+                    <td>Form APL-02</td>
+                    <td>Skema Digital Marketing</td>
+                    <td>05-12-2025</td>
+                    <td><span class="admin-badge admin-badge-warning">Butuh Revisi</span></td>
+                  </tr>
+                  <tr>
+                    <td>BA_Uji_DM_TUKUtama_05122025.docx</td>
+                    <td>Berita Acara</td>
+                    <td>TUK Kampus Utama</td>
+                    <td>06-12-2025</td>
+                    <td><span class="admin-badge admin-badge-info">Menunggu Validasi</span></td>
+                  </tr>
+                  <tr>
+                    <td>DaftarHadir_Asesi_DM_05122025.xlsx</td>
+                    <td>Daftar Hadir</td>
+                    <td>20 Asesi</td>
+                    <td>05-12-2025</td>
+                    <td><span class="admin-badge admin-badge-success">Lengkap</span></td>
+                  </tr>
+                  <tr>
+                    <td>Laporan_Asesmen_DM_05122025.pdf</td>
+                    <td>Laporan Hasil Asesmen</td>
+                    <td>Digital Marketing</td>
+                    <td>07-12-2025</td>
+                    <td><span class="admin-badge admin-badge-muted">Draft</span></td>
+                  </tr>
+                  <tr>
+                    <td>BA_Uji_AP_TUKKampus2_14122025.docx</td>
+                    <td>Berita Acara</td>
+                    <td>Administrasi Perkantoran</td>
+                    <td>14-12-2025</td>
+                    <td><span class="admin-badge admin-badge-info">Menunggu Validasi</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Form upload (dummy) -->
+            <div class="admin-info-box" style="margin-top:16px;">
+              <h3>Upload Dokumen (Dummy)</h3>
+              <small>Form ini hanya tampilan awal, belum terhubung proses upload.</small>
+
+              <form>
+                <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px; margin-top:8px; margin-bottom:12px;">
+                  <div>
+                    <label style="font-size:12px; color:#555; display:block; margin-bottom:4px;">Nama Dokumen</label>
+                    <input type="text" class="admin-input" placeholder="Contoh: BA_Uji_DM_TUKUtama_05122025.docx">
+                  </div>
+                  <div>
+                    <label style="font-size:12px; color:#555; display:block; margin-bottom:4px;">Kategori Dokumen</label>
+                    <select class="admin-input">
+                      <option value="">Pilih kategori</option>
+                      <option value="apl01">Form APL-01</option>
+                      <option value="apl02">Form APL-02</option>
+                      <option value="ba">Berita Acara Uji</option>
+                      <option value="hadir">Daftar Hadir</option>
+                      <option value="laporan">Laporan Hasil Asesmen</option>
+                      <option value="lain">Lainnya</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style="font-size:12px; color:#555; display:block; margin-bottom:4px;">Terkait Skema / TUK</label>
+                    <input type="text" class="admin-input" placeholder="Misal: Skema DM / TUK Kampus Utama">
+                  </div>
+                  <div>
+                    <label style="font-size:12px; color:#555; display:block; margin-bottom:4px;">Jenis File</label>
+                    <select class="admin-input">
+                      <option value="">Pilih jenis file</option>
+                      <option value="pdf">PDF</option>
+                      <option value="doc">DOC / DOCX</option>
+                      <option value="xls">XLS / XLSX</option>
+                      <option value="img">Gambar (JPG/PNG)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style="margin-bottom:12px;">
+                  <label style="font-size:12px; color:#555; display:block; margin-bottom:4px;">Upload File</label>
+                  <input type="file" class="admin-input">
+                  <small style="font-size:11px; color:#888;">
+                    File yang diupload idealnya disimpan di folder khusus, misal: <code>uploads/dokumen/</code>.
+                  </small>
+                </div>
+
+                <div style="margin-bottom:12px;">
+                  <label style="font-size:12px; color:#555; display:block; margin-bottom:4px;">Keterangan</label>
+                  <textarea class="admin-input" rows="3" placeholder="Catatan tambahan, misal sesi uji, catatan revisi, dsb."></textarea>
+                </div>
+
+                <button type="button" class="admin-btn">
+                  <i class="fa fa-upload"></i> Simpan / Upload (Dummy)
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Kolom kanan: info & panduan -->
+          <div>
+            <div class="admin-info-box">
+              <h3>Template Manajemen Dokumen</h3>
+              <small>Contoh daftar jenis dokumen yang dikelola:</small>
+              <ul>
+                <li>Form APL-01 &amp; APL-02</li>
+                <li>Berita Acara Uji Kompetensi</li>
+                <li>Daftar Hadir Asesi &amp; Asesor</li>
+                <li>Laporan Hasil Asesmen</li>
+                <li>Dokumen pendukung lain (foto kegiatan, notulen, dll.)</li>
+              </ul>
+              <p style="font-size: 12px; color:#777; margin-top:10px;">
+                Ke depan, bagian ini dapat disambungkan dengan sistem penyimpanan file (lokal server atau cloud storage)
+                agar pengelolaan dokumen lebih terstruktur.
+              </p>
+            </div>
+
+            <div class="admin-info-box" style="margin-top:16px;">
+              <h3>Panduan Penamaan File</h3>
+              <small>Rekomendasi format penamaan agar konsisten:</small>
+              <ul>
+                <li><strong>Form APL:</strong> <code>APL-01_KODE-SKEMA_TANGGAL.ext</code></li>
+                <li><strong>Berita Acara:</strong> <code>BA_Uji_KODE-SKEMA_TUK_TANGGAL.ext</code></li>
+                <li><strong>Daftar Hadir:</strong> <code>DaftarHadir_Asesi/KodeSkema_TANGGAL.ext</code></li>
+                <li><strong>Laporan Asesmen:</strong> <code>Laporan_Asesmen_KODE-SKEMA_TANGGAL.ext</code></li>
+              </ul>
+              <p style="font-size: 12px; color:#777; margin-top:10px;">
+                Dengan format penamaan yang konsisten, proses pencarian dan audit dokumen akan jauh lebih mudah.
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- JS Sidebar -->
+  <script>
+    (function () {
+      var sidebar = document.getElementById('adminSidebar');
+      var sidebarToggle = document.getElementById('adminSidebarToggle');
+      var sidebarOverlay = document.getElementById('adminSidebarOverlay');
+
+      function openSidebar() {
+        if (!sidebar) return;
+        sidebar.classList.add('open');
+        if (sidebarOverlay) {
+          sidebarOverlay.classList.add('active');
+        }
+      }
+
+      function closeSidebar() {
+        if (!sidebar) return;
+        sidebar.classList.remove('open');
+        if (sidebarOverlay) {
+          sidebarOverlay.classList.remove('active');
+        }
+      }
+
+      if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function () {
+          if (sidebar.classList.contains('open')) {
+            closeSidebar();
+          } else {
+            openSidebar();
+          }
+        });
+      }
+
+      if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeSidebar);
+      }
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 991) {
+          closeSidebar();
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Data Asesor — Admin LSP PLGM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="admin-body">
+  <div class="admin-wrapper">
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-sidebar-header">
+        <div class="admin-sidebar-logo">
+          <i class="fa fa-shield"></i>
+          <div>
+            <div>LSP PLGM</div>
+            <span class="badge">Admin Panel</span>
+          </div>
+        </div>
+      </div>
+
+      <ul class="admin-sidebar-menu">
+        <li><a href="dashboard-admin.html" class="admin-nav-link"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+        <li><a href="asesi.html" class="admin-nav-link"><i class="fa fa-users"></i> <span>Data Asesi</span></a></li>
+        <li><a href="asesor.html" class="admin-nav-link active"><i class="fa fa-user-circle"></i> <span>Data Asesor</span></a></li>
+        <li><a href="skema.html" class="admin-nav-link"><i class="fa fa-list-alt"></i> <span>Skema Sertifikasi</span></a></li>
+        <li><a href="jadwal.html" class="admin-nav-link"><i class="fa fa-calendar"></i> <span>Jadwal Uji Kompetensi</span></a></li>
+        <li><a href="berkas.html" class="admin-nav-link"><i class="fa fa-folder-open"></i> <span>Berkas / Dokumen</span></a></li>
+        <li><a href="pengaturan.html" class="admin-nav-link"><i class="fa fa-cog"></i> <span>Pengaturan Akun</span></a></li>
+        <li><a href="index.html" class="admin-nav-link"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+      </ul>
+
+      <div class="admin-sidebar-footer">
+        <div>LSP PLGM &copy; 2025</div>
+        <div style="margin-top:4px;">Sistem Informasi Sertifikasi</div>
+      </div>
+    </aside>
+
+    <div class="admin-sidebar-overlay" id="adminSidebarOverlay"></div>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="admin-topbar-left">
+          <button class="admin-sidebar-toggle" id="adminSidebarToggle" aria-label="Toggle sidebar">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div>
+            <div class="admin-topbar-title">Data Asesor</div>
+            <div class="admin-topbar-subtitle">Daftar asesor kompetensi di LSP PLGM</div>
+          </div>
+        </div>
+        <div class="admin-topbar-right">
+          <button class="admin-icon-btn" type="button">
+            <i class="fa fa-bell"></i>
+            <span class="admin-icon-badge">3</span>
+          </button>
+          <div class="admin-user-info">
+            <div class="admin-user-avatar">A</div>
+            <div>
+              <div class="admin-user-name">Admin LSP PLGM</div>
+              <div class="admin-user-role">Administrator</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <div class="admin-section-header">
+          <h2>Data Asesor</h2>
+          <p>Daftar asesor kompetensi di LSP PLGM.</p>
+        </div>
+
+        <div class="admin-table-wrapper">
+          <div class="admin-table-title">
+            <span>Daftar Asesor</span>
+            <span class="sub">Contoh data dummy</span>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Asesor</th>
+                <th>No. Registrasi</th>
+                <th>Skema Keahlian</th>
+                <th>Status Sertifikat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Drs. Hendra Saputra</td>
+                <td>ASESOR-001</td>
+                <td>Digital Marketing</td>
+                <td><span class="admin-badge admin-badge-success">Aktif</span></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Nur Aisyah, S.Kom</td>
+                <td>ASESOR-002</td>
+                <td>Operator Komputer</td>
+                <td><span class="admin-badge admin-badge-success">Aktif</span></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Muhammad Rafi, SE</td>
+                <td>ASESOR-003</td>
+                <td>Administrasi Perkantoran</td>
+                <td><span class="admin-badge admin-badge-warning">Perlu Perpanjangan</span></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Intan Permatasari</td>
+                <td>ASESOR-004</td>
+                <td>Digital Marketing</td>
+                <td><span class="admin-badge admin-badge-success">Aktif</span></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Yudi Firmansyah</td>
+                <td>ASESOR-005</td>
+                <td>Operator Komputer</td>
+                <td><span class="admin-badge admin-badge-muted">Nonaktif</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- JS Sidebar -->
+  <script>
+    (function () {
+      var sidebar = document.getElementById('adminSidebar');
+      var sidebarToggle = document.getElementById('adminSidebarToggle');
+      var sidebarOverlay = document.getElementById('adminSidebarOverlay');
+
+      function openSidebar() {
+        if (!sidebar) return;
+        sidebar.classList.add('open');
+        if (sidebarOverlay) {
+          sidebarOverlay.classList.add('active');
+        }
+      }
+
+      function closeSidebar() {
+        if (!sidebar) return;
+        sidebar.classList.remove('open');
+        if (sidebarOverlay) {
+          sidebarOverlay.classList.remove('active');
+        }
+      }
+
+      if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function () {
+          if (sidebar.classList.contains('open')) {
+            closeSidebar();
+          } else {
+            openSidebar();
+          }
+        });
+      }
+
+      if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeSidebar);
+      }
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 991) {
+          closeSidebar();
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>
