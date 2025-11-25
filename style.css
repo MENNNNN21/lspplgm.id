@@ -28,12 +28,9 @@ body {
     font-size: 14px;
     font-family: 'Ubuntu', sans-serif;
     line-height: 1.80857;
-    padding-top: 80px;
-
-    margin: 0 ;
+    padding-top: 100px;
+    margin: 0 !important;
 }
-
-
 
 html, body {
     height: 100%;
@@ -832,9 +829,9 @@ a.btn-tentang:hover {
 /* === FOOTER LMC CORPORATE === */
 
 .footer-lmc {
-  background: #233C7E; /* hitam elegan */
+  background: #233C7E;
   color: #ffffff;
-  border-top: 4px solid #D69F3A; /* garis emas */
+  border-top: 4px solid #D69F3A;
   padding-top: 20px;
   padding-bottom: 10px;
   font-size: 15px;
@@ -852,7 +849,7 @@ a.btn-tentang:hover {
 .footer-title {
   font-size: 17px;
   font-weight: 600;
-  color: #D69F3A; /* emas */
+  color: #D69F3A;
   margin-bottom: 12px;
 }
 
@@ -886,7 +883,6 @@ a.btn-tentang:hover {
 .footer-copy p {
   margin: 0;
 }
-
 
 /*------------------------------------------------------------------
     MISC (LOADER & SCROLL TOP)
@@ -995,289 +991,286 @@ a.btn-tentang:hover {
 /*------------------------------------------------------------------
     ( Skema )
 -------------------------------------------------------------------*/
+.skema-header {
+    background: #ffffff;
+    padding: 40px 0 24px;
+    border-bottom: 1px solid #edf0f4;
+}
 
- .skema-header {
-      background: #ffffff;
-      padding: 40px 0 24px;
-      border-bottom: 1px solid #edf0f4;
-    }
+.skema-breadcrumb {
+    font-size: 13px;
+    color: #8a8fa0;
+    margin-bottom: 6px;
+}
 
-    .skema-breadcrumb {
-      font-size: 13px;
-      color: #8a8fa0;
-      margin-bottom: 6px;
-    }
+.skema-breadcrumb a {
+    color: #6976a3;
+}
 
-    .skema-breadcrumb a {
-      color: #6976a3;
-    }
+.skema-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--lsp-blue);
+    margin-bottom: 8px;
+}
 
-    .skema-title {
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--lsp-blue);
-      margin-bottom: 8px;
-    }
+.skema-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: #e8f0ff;
+    color: #3550a5;
+    gap: 6px;
+}
 
-    .skema-tag {
-      display: inline-flex;
-      align-items: center;
-      font-size: 13px;
-      padding: 5px 12px;
-      border-radius: 999px;
-      background: #e8f0ff;
-      color: #3550a5;
-      gap: 6px;
-    }
+.skema-actions .btn {
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 14px;
+}
 
-    .skema-actions .btn {
-      border-radius: 999px;
-      padding: 8px 18px;
-      font-size: 14px;
-    }
+.btn-skema-primary {
+    background: var(--lsp-blue);
+    color: #fff;
+}
 
-    .btn-skema-primary {
-      background: var(--lsp-blue);
-      color: #fff;
-    }
+.btn-skema-primary:hover {
+    background: #1a2d5d;
+    color: #fff;
+}
 
-    .btn-skema-primary:hover {
-      background: #1a2d5d;
-      color: #fff;
-    }
+.btn-skema-outline {
+    border: 1px solid var(--lsp-blue);
+    color: var(--lsp-blue);
+    background: #fff;
+}
 
-    .btn-skema-outline {
-      border: 1px solid var(--lsp-blue);
-      color: var(--lsp-blue);
-      background: #fff;
-    }
+.btn-skema-outline:hover {
+    background: var(--lsp-blue);
+    color: #fff;
+}
 
-    .btn-skema-outline:hover {
-      background: var(--lsp-blue);
-      color: #fff;
-    }
+.skema-stat-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: -18px;
+    position: relative;
+    z-index: 2;
+}
 
-    .skema-stat-card {
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 16px 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: -18px;
-      position: relative;
-      z-index: 2;
-    }
+.skema-stat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f4ff;
+    color: var(--lsp-blue);
+    font-size: 20px;
+}
 
-    .skema-stat-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f1f4ff;
-      color: var(--lsp-blue);
-      font-size: 20px;
-    }
+.skema-stat-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #8f94a3;
+    margin-bottom: 2px;
+}
 
-    .skema-stat-label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-      color: #8f94a3;
-      margin-bottom: 2px;
-    }
+.skema-stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #20253a;
+}
 
-    .skema-stat-value {
-      font-size: 18px;
-      font-weight: 700;
-      color: #20253a;
-    }
+.skema-main {
+    background: var(--soft-bg);
+    padding: 40px 0 60px;
+}
 
-    .skema-main {
-      background: var(--soft-bg);
-      padding: 40px 0 60px;
-    }
+.skema-meta-card,
+.skema-ringkasan-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px 24px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.03);
+    height: 100%;
+}
 
-    .skema-meta-card,
-    .skema-ringkasan-card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 20px 24px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.03);
-      height: 100%;
-    }
+.skema-meta-card table {
+    width: 100%;
+    font-size: 14px;
+}
 
-    .skema-meta-card table {
-      width: 100%;
-      font-size: 14px;
-    }
+.skema-meta-card th {
+    width: 32%;
+    color: #7a7f90;
+    font-weight: 500;
+    padding: 6px 0;
+}
 
-    .skema-meta-card th {
-      width: 32%;
-      color: #7a7f90;
-      font-weight: 500;
-      padding: 6px 0;
-    }
+.skema-meta-card td {
+    color: #25293c;
+    padding: 6px 0;
+}
 
-    .skema-meta-card td {
-      color: #25293c;
-      padding: 6px 0;
-    }
+.skema-ringkasan-card h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2a4c;
+    margin-bottom: 8px;
+}
 
-    .skema-ringkasan-card h5 {
-      font-size: 16px;
-      font-weight: 600;
-      color: #1f2a4c;
-      margin-bottom: 8px;
-    }
+.skema-ringkasan-card p {
+    font-size: 14px;
+    color: #4f566b;
+}
 
-    .skema-ringkasan-card p {
-      font-size: 14px;
-      color: #4f566b;
-    }
+.skema-ringkasan-card ul {
+    padding-left: 18px;
+    font-size: 14px;
+    color: #4f566b;
+    margin-bottom: 0;
+}
 
-    .skema-ringkasan-card ul {
-      padding-left: 18px;
-      font-size: 14px;
-      color: #4f566b;
-      margin-bottom: 0;
-    }
+.skema-ringkasan-card ul li+li {
+    margin-top: 4px;
+}
 
-    .skema-ringkasan-card ul li+li {
-      margin-top: 4px;
-    }
+/* TAB SECTION */
+.skema-tabs-wrapper {
+    margin-top: 32px;
+}
 
-    /* TAB SECTION */
-    .skema-tabs-wrapper {
-      margin-top: 32px;
-    }
+.skema-tabs .nav-link {
+    border-radius: 999px;
+    padding: 8px 18px;
+    margin-right: 8px;
+    font-size: 14px;
+    color: #5c6274;
+    border: 0;
+}
 
-    .skema-tabs .nav-link {
-      border-radius: 999px;
-      padding: 8px 18px;
-      margin-right: 8px;
-      font-size: 14px;
-      color: #5c6274;
-      border: 0;
-    }
+.skema-tabs .nav-link.active {
+    background: var(--lsp-blue);
+    color: #ffffff;
+    font-weight: 500;
+}
 
-    .skema-tabs .nav-link.active {
-      background: var(--lsp-blue);
-      color: #ffffff;
-      font-weight: 500;
-    }
+.skema-tab-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px 24px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.03);
+    margin-top: 16px;
+}
 
-    .skema-tab-card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 20px 24px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.03);
-      margin-top: 16px;
-    }
+.skema-tab-card h5 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2a4c;
+    margin-bottom: 12px;
+}
 
-    .skema-tab-card h5 {
-      font-size: 16px;
-      font-weight: 600;
-      color: #1f2a4c;
-      margin-bottom: 12px;
-    }
+.skema-tab-card p,
+.skema-tab-card li {
+    font-size: 14px;
+    color: #4f566b;
+}
 
-    .skema-tab-card p,
-    .skema-tab-card li {
-      font-size: 14px;
-      color: #4f566b;
-    }
+.skema-tab-card ul {
+    padding-left: 18px;
+}
 
-    .skema-tab-card ul {
-      padding-left: 18px;
-    }
+/* TABEL UNIT KOMPETENSI */
+.table-unit th {
+    font-size: 13px;
+    background: #f4f6fb;
+    border-top: 0;
+    color: #656b7c;
+}
 
-    /* TABEL UNIT KOMPETENSI */
-    .table-unit th {
-      font-size: 13px;
-      background: #f4f6fb;
-      border-top: 0;
-      color: #656b7c;
-    }
+.table-unit td {
+    font-size: 13px;
+    vertical-align: top;
+}
 
-    .table-unit td {
-      font-size: 13px;
-      vertical-align: top;
-    }
+.table-unit tbody tr:hover {
+    background: #fafbff;
+}
 
-    .table-unit tbody tr:hover {
-      background: #fafbff;
-    }
+/* PROFESI & JADWAL */
+.chip-profesi {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #ffffff;
+    font-size: 13px;
+    color: #3b4260;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+    margin: 4px 6px 4px 0;
+    gap: 8px;
+}
 
-    /* PROFESI & JADWAL */
-    .chip-profesi {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: #ffffff;
-      font-size: 13px;
-      color: #3b4260;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
-      margin: 4px 6px 4px 0;
-      gap: 8px;
-    }
+.chip-profesi i {
+    font-size: 16px;
+    color: var(--lsp-blue);
+}
 
-    .chip-profesi i {
-      font-size: 16px;
-      color: var(--lsp-blue);
-    }
+.jadwal-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+    font-size: 13px;
+    height: 100%;
+}
 
-    .jadwal-card {
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 14px 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
-      font-size: 13px;
-      height: 100%;
-    }
+.jadwal-card h6 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #1f2a4c;
+}
 
-    .jadwal-card h6 {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #1f2a4c;
-    }
+.jadwal-card .meta {
+    color: #6b7184;
+}
 
-    .jadwal-card .meta {
-      color: #6b7184;
-    }
+.jadwal-card .btn-sm {
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 12px;
+}
 
-    .jadwal-card .btn-sm {
-      border-radius: 999px;
-      padding: 4px 12px;
-      font-size: 12px;
-    }
+@media (max-width: 767.98px) {
+  .skema-title {
+    font-size: 24px;
+  }
 
-    @media (max-width: 767.98px) {
-      .skema-title {
-        font-size: 24px;
-      }
+  .skema-stat-card {
+    margin-top: 16px;
+  }
 
-      .skema-stat-card {
-        margin-top: 16px;
-      }
-
-      .skema-tabs {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding-bottom: 4px;
-      }
-    }
-
+  .skema-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+}
 
 /*------------------------------------------------------------------
-    ( Daftar )
+    ( Daftar ) – MERGED
 -------------------------------------------------------------------*/
-
 .daftar-header-modern {
     position: relative;
     width: 100%;
@@ -1287,15 +1280,20 @@ a.btn-tentang:hover {
     overflow: hidden;
 }
 
+.daftar-header-modern .container {
+  position: relative;
+  z-index: 2;         
+}
+
 .daftar-title {
     font-size: 48px;
     font-weight: 800;
     color: #233C7E;
     text-transform: capitalize;
     letter-spacing: 1px;
-} 
+}   
 
- .daftar-underline {
+.daftar-underline {
     width: 80px;
     height: 6px;
     background: #D69F3A;
@@ -1304,7 +1302,7 @@ a.btn-tentang:hover {
     animation: underlineGrow 1.2s ease;
 }
 
-    .daftar-deco {
+.daftar-deco {
     position: absolute;
     right: -80px;
     top: 0;
@@ -1319,47 +1317,41 @@ a.btn-tentang:hover {
     align-items: center;
 }
 
-
-    .daftar-deco img {
-      max-width: 140px;
-    }
-
-    #daftarForm .form-label {
-      font-weight: 500;
-      font-size: 14px;
-    }
-
-    #daftarForm .form-control {
-      font-size: 14px;
-    }
-
-    #daftarForm .section-label {
-      font-size: 15px;
-      font-weight: 600;
-      margin-top: 8px;
-      margin-bottom: 10px;
-      color: #233C7E;
-    }
-
-    #daftarForm button.btn-primary.btn-lg {
-      padding: 10px 40px;
-      border-radius: 999px;
-      background-color: #233C7E;
-      border-color: #233C7E;
-    }
-
-    #daftarForm button.btn-primary.btn-lg:hover {
-      background-color: #1a2e5c;
-      border-color: #1a2e5c;
-    }
-
-
-
-/* Pastikan bar copyright nempel ke bawah */
-.footer-copy {
-  margin: 0;
+.daftar-deco img {
+    max-width: 140px;
 }
 
+/* Form daftar dari file pertama */
+#daftarForm .form-label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+#daftarForm .form-control {
+  font-size: 14px;
+}
+
+#daftarForm .section-label {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  color: #233C7E;
+}
+
+#daftarForm button.btn-primary.btn-lg {
+  padding: 10px 40px;
+  border-radius: 999px;
+  background-color: #233C7E;
+  border-color: #233C7E;
+}
+
+#daftarForm button.btn-primary.btn-lg:hover {
+  background-color: #1a2e5c;
+  border-color: #1a2e5c;
+}
+
+/* Tooltip error password (versi lengkap dengan arrow) */
 .error-tooltip {
   position: absolute;
   background: #dc3545;
@@ -1383,7 +1375,107 @@ a.btn-tentang:hover {
   border-color: transparent transparent #dc3545 transparent;
 }
 
-/* css/dashboard-style.css */
+/* Pesan error tanda tangan */
+.signature-error {
+  font-size: 13px;
+  color: #dc3545;
+  display: none;
+}
+
+/* Modal backdrop tanda tangan */
+.signature-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(2px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Kotak modal tanda tangan */
+.signature-modal {
+  width: 90%;
+  max-width: 520px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.3);
+  overflow: hidden;
+}
+
+.signature-modal-header {
+  padding: 12px 18px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.signature-modal-header button {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: #64748b;
+}
+
+.signature-modal-body {
+  padding: 16px 18px;
+}
+
+.signature-pad {
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #cfd8e3;
+  overflow: hidden;
+}
+
+#signature-canvas {
+  width: 100%;
+  max-width: 100%;
+  height: 200px;
+  display: block;
+  cursor: crosshair;
+}
+
+.signature-modal-footer {
+  padding: 10px 18px 14px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.signature-modal-footer .btn {
+  min-width: 90px;
+}
+
+/* Link "Masukkan Tanda Tangan" */
+.signature-link {
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Preview tanda tangan di form */
+#signature-preview-img {
+  max-height: 120px;
+}
+
+/* Pastikan bar copyright nempel ke bawah */
+.footer-copy {
+  margin: 0;
+}
+
+/*------------------------------------------------------------------
+    css/dashboard-style.css (dari file pertama)
+-------------------------------------------------------------------*/
 
 body {
     overflow-x: hidden;

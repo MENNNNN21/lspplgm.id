@@ -42,170 +42,8 @@
 
   <!-- Style khusus halaman daftar (boleh dipindah ke custom.css) -->
   <style>
-    .section-label {
-      font-weight: 600;
-      margin-top: 20px;
-      margin-bottom: 10px;
-      font-size: 15px;
-      text-transform: uppercase;
-      letter-spacing: .03em;
-      color: #0d47a1;
-    }
 
-    .daftar-header-modern {
-      padding-top: 130px;
-      padding-bottom: 40px;
-      text-align: center;
-      position: relative;
-      background: linear-gradient(135deg, #0d47a1, #1976d2);
-      color: #fff;
-    }
 
-    .daftar-title {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .daftar-underline {
-      width: 60px;
-      height: 4px;
-      background: #ffca28;
-      border-radius: 10px;
-      margin: 0 auto;
-    }
-
-    .daftar-deco .about-logo-modern {
-      position: absolute;
-      right: 15px;
-      bottom: 10px;
-      width: 90px;
-      opacity: 0.15;
-    }
-
-    @media (max-width: 767.98px) {
-      .daftar-header-modern {
-        padding-top: 110px;
-        padding-bottom: 30px;
-      }
-
-      .daftar-title {
-        font-size: 24px;
-      }
-
-      .daftar-deco .about-logo-modern {
-        display: none;
-      }
-    }
-
-    /* Tooltip error password */
-    .error-tooltip {
-      display: none;
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #dc3545;
-      color: #fff;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 11px;
-      white-space: nowrap;
-      z-index: 5;
-    }
-
-    /* Pesan error tanda tangan */
-    .signature-error {
-      font-size: 13px;
-      color: #dc3545;
-      display: none;
-    }
-
-    /* Modal backdrop tanda tangan */
-    .signature-modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(2px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-
-    /* Kotak modal tanda tangan */
-    .signature-modal {
-      width: 90%;
-      max-width: 520px;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.3);
-      overflow: hidden;
-    }
-
-    .signature-modal-header {
-      padding: 12px 18px;
-      border-bottom: 1px solid #e2e8f0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    .signature-modal-header button {
-      border: none;
-      background: transparent;
-      font-size: 20px;
-      line-height: 1;
-      cursor: pointer;
-      color: #64748b;
-    }
-
-    .signature-modal-body {
-      padding: 16px 18px;
-    }
-
-    .signature-pad {
-      background: #ffffff;
-      border-radius: 6px;
-      border: 1px solid #cfd8e3;
-      overflow: hidden;
-    }
-
-    #signature-canvas {
-      width: 100%;
-      max-width: 100%;
-      height: 200px;
-      display: block;
-      cursor: crosshair;
-    }
-
-    .signature-modal-footer {
-      padding: 10px 18px 14px;
-      border-top: 1px solid #e2e8f0;
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .signature-modal-footer .btn {
-      min-width: 90px;
-    }
-
-    /* Link "Masukkan Tanda Tangan" */
-    .signature-link {
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    /* Preview tanda tangan di form */
-    #signature-preview-img {
-      max-height: 120px;
-    }
   </style>
 
   <!--[if lt IE 9]>
@@ -227,92 +65,10 @@
   </div>
   <!-- END LOADER -->
 
-  <!-- TOP BAR -->
-  <nav class="navbar top-navbar py-2">
-    <div class="container d-flex justify-content-between align-items-center">
-
-      <!-- Kiri: Sosial Media -->
-      <div class="navbar-nav flex-row">
-        <a href="#" class="nav-link px-0 pr-3 top-icon">
-          <i class="fa fa-facebook"></i>
-        </a>
-        <a href="#" class="nav-link px-0 pr-3 top-icon">
-          <i class="fa fa-instagram"></i>
-        </a>
-        <a href="#" class="nav-link px-0 top-icon">
-          <i class="fa fa-youtube-play"></i>
-        </a>
-      </div>
-
-      <!-- Kanan: Login -->
-      <div class="navbar-nav">
-        <a href="login.html" class="nav-link px-0 top-icon">
-          Login
-        </a>
-      </div>
-
-    </div>
-  </nav>
-  <!-- END TOP BAR -->
-
-  <!-- NAVBAR UTAMA -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        <img class="img-fluid nav-logo" src="images/logo.png" alt="LSP" />
-      </a>
-
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-        aria-label="Toggle navigation">
-        Menu <i class="fa fa-bars"></i>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav text-uppercase ml-auto">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="index.html">Beranda</a>
-          </li>
-
-          <!-- Dropdown PROFIL -->
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link" id="profilDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Profil <i class="bi dropdown-toggle"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="profilDropdown">
-              <a class="dropdown-item" href="tentang-kami.html">Tentang LSP</a>
-              <a class="dropdown-item" href="visi-misi.html">Visi &amp; Misi</a>
-              <a class="dropdown-item" href="kebijakan-mutu.html">Kebijakan &amp; Sasaran Mutu</a>
-              <a class="dropdown-item" href="struktur-organisasi.html">Struktur Organisasi</a>
-            </div>
-          </li>
-
-          <!-- Dropdown SERTIFIKASI -->
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link" id="sertifikasiDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Sertifikasi <i class="bi dropdown-toggle"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="sertifikasiDropdown">
-              <a class="dropdown-item" href="skema-sertifikasi.html">Skema Sertifikasi</a>
-              <a class="dropdown-item" href="tempat-sertifikasi.html">Tempat Uji Kompetensi</a>
-            </div>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger active" href="daftar.html">Daftar</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <!-- END NAVBAR UTAMA -->
-
-  <!-- HEADER PENDAFTARAN -->
+  <!-- HEADER PENDAFTARAN (TANPA NAVBAR) -->
   <section id="daftar" class="daftar-header-modern">
     <div class="container" data-aos="fade-up">
-      <h2 class="daftar-title">Pendaftaran Sertifikasi</h2>
+      <h2 class="daftar-title">Pendaftaran</h2>
       <div class="daftar-underline"></div>
     </div>
 
@@ -483,7 +239,8 @@
                   <div class="position-relative">
                     <label for="password_confirmation" class="form-label">Konfirmasi Password
                       <span class="text-danger">*</span></label>
-                   <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                    <input type="password" class="form-control" id="password_confirmation"
+                      name="password_confirmation" required>
                     <div id="tooltip-password" class="error-tooltip">Password tidak sama</div>
                   </div>
                 </div>
@@ -523,6 +280,13 @@
               <div class="text-center">
                 <button type="submit" class="btn btn-primary btn-lg">Daftar Sekarang</button>
               </div>
+
+              <!-- LINK KECIL KE HALAMAN LOGIN -->
+              <p class="text-center mt-3" style="font-size:14px;">
+                Sudah punya akun?
+                <a href="login.html">Login di sini</a>
+              </p>
+
             </form>
 
           </div><!-- card-body -->
@@ -548,10 +312,9 @@
         <button type="button" class="btn btn-danger" id="btn-signature-clear">Hapus Kanvas</button>
 
         <label class="btn btn-success mb-0">
-        Upload Signature
-        <input type="file" id="signature-upload" accept=".jpg,.jpeg,.png" style="display:none;">
+          Upload Signature
+          <input type="file" id="signature-upload" accept=".jpg,.jpeg,.png" style="display:none;">
         </label>
-
 
         <button type="button" class="btn btn-primary" id="btn-signature-save">Simpan</button>
       </div>
@@ -625,7 +388,7 @@
   <!-- ALL PLUGINS -->
   <script src="js/custom.js"></script>
 
-  <!-- SCRIPT VALIDASI + NAVBAR + MODAL TANDA TANGAN -->
+  <!-- SCRIPT VALIDASI + MODAL TANDA TANGAN -->
   <script>
     // === VALIDASI PASSWORD SAMA (REAL-TIME) ===
     const formDaftar = document.getElementById('daftarForm');
@@ -779,37 +542,36 @@
     }
 
     // Upload Signature (gambar)
-   if (uploadSignatureInput) {
-  uploadSignatureInput.addEventListener('change', function () {
-    const file = this.files[0];
-    if (!file) return;
+    if (uploadSignatureInput) {
+      uploadSignatureInput.addEventListener('change', function () {
+        const file = this.files[0];
+        if (!file) return;
 
-    // validasi tipe file
-    const allowedTypes = ['image/jpeg', 'image/png'];
-    if (!allowedTypes.includes(file.type)) {
-      alert('Format tanda tangan harus JPG atau PNG.');
-      this.value = '';
-      return;
+        // validasi tipe file
+        const allowedTypes = ['image/jpeg', 'image/png'];
+        if (!allowedTypes.includes(file.type)) {
+          alert('Format tanda tangan harus JPG atau PNG.');
+          this.value = '';
+          return;
+        }
+
+        // validasi ukuran (2MB)
+        const maxSize = 2 * 1024 * 1024; // 2MB
+        if (file.size > maxSize) {
+          alert('Ukuran file maksimal 2MB.');
+          this.value = '';
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          uploadedSignatureData = e.target.result; // base64
+          isSigned = false;
+          signatureError.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      });
     }
-
-    // validasi ukuran (2MB)
-    const maxSize = 2 * 1024 * 1024; // 2MB
-    if (file.size > maxSize) {
-      alert('Ukuran file maksimal 2MB.');
-      this.value = '';
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      uploadedSignatureData = e.target.result; // base64
-      isSigned = false;
-      signatureError.style.display = 'none';
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
 
     // Simpan tanda tangan (canvas / upload)
     if (saveSignatureBtn) {
@@ -860,48 +622,14 @@
 
       this.classList.add('was-validated');
     }, false);
+  </script>
 
-    // === SCRIPT NAVBAR MOBILE (kalau masih dipakai di project lainmu) ===
-    const navToggle = document.querySelector('.mobile-nav-toggle');
-    const navMenu = document.querySelector('#navbar ul');
-
-    if (navToggle && navMenu) {
-      navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('show');
-
-        if (navMenu.classList.contains('show')) {
-          navToggle.classList.remove('bi-list');
-          navToggle.classList.add('bi-x');
-        } else {
-          navToggle.classList.remove('bi-x');
-          navToggle.classList.add('bi-list');
-        }
-      });
-    }
-
-    document.querySelectorAll('#navbar a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 991 && link.parentElement.classList.contains('dropdown')) {
-          return;
-        }
-
-        if (navMenu && navMenu.classList.contains('show')) {
-          navMenu.classList.remove('show');
-          if (navToggle) {
-            navToggle.classList.remove('bi-x');
-            navToggle.classList.add('bi-list');
-          }
-        }
-      });
-    });
-
-    window.addEventListener('scroll', function () {
-      var scrolled = window.scrollY || window.pageYOffset;
-
-      if (scrolled > 80) {
-        document.body.classList.add('hide-top-navbar');
-      } else {
-        document.body.classList.remove('hide-top-navbar');
+  <!-- PAKSA PRELOADER HILANG KETIKA HALAMAN SELESAI DIMUAT -->
+  <script>
+    window.addEventListener('load', function () {
+      var preloader = document.getElementById('preloader');
+      if (preloader) {
+        preloader.style.display = 'none';
       }
     });
   </script>

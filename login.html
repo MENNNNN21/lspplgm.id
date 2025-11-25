@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Login - LSP Politeknik LP3I Global Mandiri</title>
+
+  <!-- CSS UTAMA -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/ionicons.min.css">
+  <link rel="stylesheet" href="css/flaticon.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/custom.css">
+
+  <style>
+    body {
+      background: #f5f7fa;
+    }
+
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 28px rgba(15, 23, 42, 0.1);
+      padding: 32px 28px;
+      position: relative;
+    }
+
+    .login-logo {
+      width: 110px;
+      display: block;
+      margin: 0 auto 18px;
+    }
+
+    .login-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #0d47a1;
+    }
+
+    .login-sub {
+      text-align: center;
+      font-size: 13px;
+      color: #6c757d;
+      margin-bottom: 24px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      top: 36px;
+      cursor: pointer;
+      color: #6c757d;
+    }
+
+    .footer-copy-simple {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- WRAPPER LOGIN -->
+  <div class="login-wrapper">
+
+    <div class="login-card">
+
+      <img src="images/logo.png" class="login-logo" alt="Logo LSP">
+
+      <div class="login-title">Login Akun</div>
+      <div class="login-sub">Masukkan kredensial Anda untuk melanjutkan</div>
+
+      <form action="mail/login.php" method="POST" id="loginForm" novalidate>
+
+        <!-- Email -->
+        <div class="form-group mb-3">
+          <label for="email">Email <span class="text-danger">*</span></label>
+          <input type="email" class="form-control" id="email" name="email"
+            placeholder="Masukkan email" required>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group mb-4 position-relative">
+          <label for="password">Password <span class="text-danger">*</span></label>
+          <input type="password" class="form-control" id="password" name="password"
+            placeholder="Masukkan password" required>
+
+          <span class="password-toggle" id="togglePassword">
+            <i class="fa fa-eye-slash"></i>
+          </span>
+        </div>
+
+        <!-- Tombol Login -->
+        <button type="submit" class="btn btn-primary btn-block btn-lg w-100">
+          Masuk
+        </button>
+
+        <!-- To daftar -->
+        <p class="text-center mt-3 mb-0" style="font-size: 14px;">
+          Belum punya akun?
+          <a href="daftar.html">Daftar sekarang</a>
+        </p>
+
+      </form>
+
+      <div class="footer-copy-simple">
+        © 2025 LSP PLGM. All Rights Reserved.
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="js/all.js"></script>
+
+  <script>
+    // show/hide password
+    const togglePassword = document.getElementById('togglePassword');
+    const inputPass = document.getElementById('password');
+
+    togglePassword.addEventListener('click', function () {
+      const type = inputPass.getAttribute('type') === 'password' ? 'text' : 'password';
+      inputPass.setAttribute('type', type);
+
+      const icon = this.querySelector('i');
+      if (icon.classList.contains('fa-eye-slash')) {
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      } else {
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      }
+    });
+
+    // validation
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      if (!this.checkValidity()) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      this.classList.add('was-validated');
+    });
+  </script>
+
+</body>
+
+</html>
